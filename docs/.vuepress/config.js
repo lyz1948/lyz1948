@@ -1,6 +1,7 @@
 module.exports = {
   title: "lyz",
   description: 'lyz的学习记录',
+  base: '/lyz1948/',
   themeConfig: {
     nav: [
       { text: 'Code', link: '/' },
