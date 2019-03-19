@@ -16,16 +16,16 @@ module.exports = {
           title: 'JavaScript',
           children: [
             '/code/js/string',
-            // '/code/js/types',
-            // '/code/js/variable',
-            // '/code/js/scope',
-            // '/code/js/regexp',
-            // '/code/js/object',
-            // '/code/js/array',
-            // '/code/js/prototype',
-            // '/code/js/function',
-            // '/code/js/this',
-            // '/code/js/class',
+            '/code/js/types',
+            '/code/js/variable',
+            '/code/js/scope',
+            '/code/js/regexp',
+            '/code/js/object',
+            '/code/js/array',
+            '/code/js/prototype',
+            '/code/js/function',
+            '/code/js/this',
+            '/code/js/class',
           ]
         },
         {
@@ -40,6 +40,7 @@ module.exports = {
         '01',
       ],
       '/finance/': [
+        '',
         '01',
       ],
       '/economics/': [
