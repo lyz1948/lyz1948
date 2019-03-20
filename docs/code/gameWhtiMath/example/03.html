@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>键盘控制方向运动</title>
+  <style>
+    html,body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    #rect {
+      width: 100px;
+      height: 100px;
+      background-color: yellowgreen;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="rect"></div>
+  <script>
+    var obj = document.querySelector('#rect')
+
+    var x = 0
+    var y = 0
+    var step = 10
+    var angle = Math.PI / 6
+    var vx = step * Math.cos(angle)
+    var vy = step * Math.sin(angle)
+    var ow = 0
+    var oh = 0
+    var vw = document.documentElement.clientWidth
+    var vh = document.documentElement.clientHeight
+
+    var init = (function() {
+      ow = obj.clientWidth
+      oh = obj.clientHeight
+      x = (vw - ow) / 2
+      y = (vh - oh) / 2
+      
+      obj.style.left = x + 'px'
+      obj.style.top = y + 'px'
+    })()
+
+    setInterval(() => {
+      move()
+    }, 1000 / 60)
+
+    var move = function(ev) {
+      x += vx 
+      y += vy 
+      // 限制范围
+      if(
+        (x < -ow) || 
+        (x > vw) || 
+        (y < -oh) ||
+        (y > vh)
+      ) {
+        x = (vw - ow) / 2
+        Y = (vh - oh) / 2
+        angle += 2 * Math.PI / 10
+        if(angle > (2 * Math.PI)) {
+          angle -= 2 * Math.PI
+        }
+        vx = step * Math.cos(angle)
+        vy = step * Math.sin(angle)        
+      }
+
+      obj.style.left = x + 'px'
+      obj.style.top = y + 'px'
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>键盘控制方向运动</title>
+  <style>
+    html,body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    #rect {
+      width: 100px;
+      height: 100px;
+      background-color: yellowgreen;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="rect"></div>
+  <script>
+    let obj = document.querySelector('#rect'),
+      timer,
+      step = 10,
+      GR = 0.4,
+      x = 0,
+      y = 200,
+      vx = 10,
+      vy = -10
+    
+    let init = function() {
+      x = 0
+      y = 200
+      vx = step
+      vy = -10
+    }
+    init()
+
+    timer = setInterval(() => {
+      move()
+    }, 1000 / 60)
+
+    let move = function(ev) {
+      x += vx
+      y += vy
+      vy += GR
+
+      if((x > document.documentElement.clientWidth) || (y > document.documentElement.clientHeight)) {
+        init()
+      }
+
+      obj.style.left = x + 'px'
+      obj.style.top = y + 'px'
+    }
+  </script>
+</body>
+
+</html>

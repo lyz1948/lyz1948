@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>键盘控制方向运动</title>
+  <style>
+    html,body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    #rect {
+      width: 100px;
+      height: 100px;
+      background-color: yellowgreen;
+      position: absolute;
+      background-size: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="rect"></div>
+  <script>
+    var obj = document.querySelector('#rect')
+
+    var x = 0
+    var y = 0
+    var step = 300
+    var timer = null
+    var isUp = false
+    var root2 = Math.sqrt(2)
+    var bLeftKey = 37, bRightKey = 39, bUpKey = 38, bDownKey = 40
+
+    var init = (function() {
+      x = (document.documentElement.clientWidth - obj.clientWidth) / 2
+      y = (document.documentElement.clientHeight - obj.clientHeight) / 2
+
+      obj.style.left = x + 'px'
+      obj.style.top = y + 'px'
+    })()
+
+    document.onkeydown = function(ev) {
+      if(ev.keyCode === bLeftKey) { // left
+        if(bUpKey | bDownKey) {
+          x -= step / root2
+        } else {
+          x -= step
+        }
+      }
+      if(ev.keyCode === bRightKey) { // right
+        if(bUpKey || bDownKey) {
+          x += step / root2
+        } else {
+          x += step
+        }
+      }
+      if(ev.keyCode === bUpKey) { // top
+        if(bLeftKey || bRightKey) {
+          y -= step / root2
+        } else {
+          y -= step
+        }
+      }
+      if(ev.keyCode === bDownKey) { // bottom
+        if(bLeftKey || bRightKey) {
+          y += step / root2
+        } else {
+          y += step
+        }
+      }
+      isUp = false
+      move(ev)
+    }
+
+    document.onkeyup = function(ev) {
+      // console.log(ev)
+      isUp = true
+    }
+
+    var move = function(ev) {
+      
+      var num = 0
+      var cur = {
+        left: parseFloat(obj.style.left),
+        top: parseFloat(obj.style.top)
+      }
+
+      const render = () => {
+        if(num < step) {
+          num += 5
+        }
+        if(ev.keyCode === bLeftKey) {
+          if(obj.offsetLeft > 0) {
+            obj.style.left = cur.left - num + 'px'
+          } 
+        } else if(ev.keyCode === bRightKey) {
+          if(obj.offsetLeft <= document.documentElement.clientWidth - obj.clientWidth) {
+            obj.style.left = cur.left + num + 'px'
+          }
+        } else if(ev.keyCode === bUpKey) {
+          if(obj.offsetTop > 0) {
+            obj.style.top = cur.top - num + 'px'
+          }
+        } else if(ev.keyCode === bDownKey) {
+          if(obj.offsetTop <= document.documentElement.clientHeight - obj.clientHeight) {
+            obj.style.top = cur.top + num + 'px'
+          }
+        }
+        if(isUp) {
+          cancelAnimationFrame(timer)
+        } else {
+          timer = requestAnimationFrame(render)
+        }
+      }
+      cancelAnimationFrame(timer)
+      timer = requestAnimationFrame(render)
+    }
+  </script>
+</body>
+
+</html>
