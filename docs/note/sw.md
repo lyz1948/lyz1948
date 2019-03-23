@@ -9,7 +9,6 @@ window.navigator.serviceWorker.register('/test.js').then(
   }).catch(err => {
     console.log('register failed)
   })
-
 ```
 
 Service Worker 文件
@@ -53,7 +52,6 @@ self.addEventListener('fetch', event => {
         caches.open('test-v1').then(function(cache) {
           cache.push(event.request, res)
         })
-
         return res.clone()
       })
     })

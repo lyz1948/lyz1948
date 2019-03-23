@@ -9,23 +9,24 @@ module.exports = {
     nav: [
       { text: 'Code', link: '/' },
       { text: 'Note', link: '/note/' },
-      { text: 'Finance', link: '/finance/' },
-      { text: 'Economics', link: '/economics/' },
-      { text: 'Literature', link: '/literature/' }
+      { text: 'Math', link: '/math/' },
+      { text: 'Get it', 
+        items: [
+          { text: 'Finance', link: '/getit/finance/' },
+          { text: 'Economics', link: '/getit/economics/' },
+          { text: 'Literature', link: '/getit/literature/' }
+        ]
+      }
     ],
     sidebar: {
       '/note/': [
-        '01',
+        '/note/01',
       ],
-      '/finance/': [
-        '',
-        '01',
-      ],
-      '/economics/': [
-        '01',
-      ],
-      '/literature/': [
-        '01',
+      '/getit/': [
+        '/getit/',
+        '/getit/finance/',
+        '/getit/economics/',
+        '/getit/literature/',
       ],
       '/': [
         '',
@@ -34,6 +35,7 @@ module.exports = {
         '/code/ramda/',
         '/code/tools/',
         '/code/tools/30sec',
+        '/code/html/',
         {
           title: 'JavaScript',
           collapsable: false,

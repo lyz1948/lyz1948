@@ -109,20 +109,20 @@ flex-flow:column wrap; // 竖排 换行
 flex-flow:row-reverse wrap //从右向左 反向换行
 
 order
-order: <interger>
+order: interger
 initial:0; 默认是0 值越大的在最右边
 
 flex-basis
-flex-basis:main-size | <width>
+flex-basis:main-size | width
 设置flex item 的初始宽/高
 
 flex-grow 最重要的一个属性
-flex-grow:<number>
+flex-grow: number
 initial:0; 初始为0
 （flex-basis + flow-grow/sum(flow-grow) * remain)
 
 flex-shrink
-flex-shrink:<number>
+flex-shrink: number
 initial:1; 初始为1
 （flex-shrink + flow-shrink/sum(flow-shrink) * remain)
 
