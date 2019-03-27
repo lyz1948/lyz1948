@@ -1,4 +1,4 @@
-# Centos系统命令与资源安装
+# Centos
 
 ### 修改CentOS系统软件安装源
 

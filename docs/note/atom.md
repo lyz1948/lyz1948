@@ -1,8 +1,4 @@
-# 编辑器
-
-## atom
-
-### 插件备份
+# atom插件备份
 
 1. 访问 `https://atom.io/users/yourname/stars`
 2. 鼠标右键，审查元素(inspect)

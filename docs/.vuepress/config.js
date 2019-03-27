@@ -6,9 +6,11 @@ module.exports = {
   ],
   base: '/lyz1948/',
   themeConfig: {
+    displayAllHeaders: true,
     nav: [
       { text: 'Code', link: '/' },
       { text: 'Note', link: '/note/' },
+      { text: 'Examples', link: '/exam/' },
       { text: 'Math', link: '/math/' },
       { text: 'Get it', 
         items: [
@@ -20,7 +22,30 @@ module.exports = {
     ],
     sidebar: {
       '/note/': [
-        '/note/01',
+        '/note/atom',
+        '/note/centos',
+        '/note/deploy',
+        '/note/editor',
+        '/note/git',
+        '/note/gitbook',
+        '/note/gulp',
+        '/note/interview',
+        '/note/mongodb',
+        '/note/nginx',
+        '/note/nvm',
+        '/note/pm2',
+        '/note/pwa',
+        '/note/rnapp',
+        '/note/ssh',
+        '/note/sw',
+        '/note/trouble',
+        '/note/vim'
+      ],
+      '/math/': [
+        '/math/',
+      ],
+      '/exam/': [
+        '/exam/',
       ],
       '/getit/': [
         '/getit/',
@@ -35,7 +60,6 @@ module.exports = {
         '/code/ramda/',
         '/code/tools/',
         '/code/tools/30sec',
-        '/code/html/',
         {
           title: 'JavaScript',
           collapsable: false,
