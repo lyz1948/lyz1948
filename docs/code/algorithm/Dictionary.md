@@ -2,7 +2,7 @@
 
 ## 创建字典
 
-```bash
+```js
 function Dictionary() {
   let items = {}
 
@@ -11,7 +11,7 @@ function Dictionary() {
   }
 
   this.remove = function(key) {
-    if(this.has(key)) {
+    if (this.has(key)) {
       delete items[key]
       return true
     }
@@ -36,8 +36,8 @@ function Dictionary() {
 
   this.values = function() {
     let values = {}
-    for(let key in items) {
-      if(this.has(key)) {
+    for (let key in items) {
+      if (this.has(key)) {
         values.push(items[key])
       }
     }

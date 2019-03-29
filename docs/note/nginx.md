@@ -50,6 +50,12 @@ rpm -ql | nginx
 nginx -t -c /etc/nginx/nginx.conf
 ```
 
+关闭network中headers的显示信息
+
+```bash
+server_tokens off;
+```
+
 重启Nginx
 
 ```js
@@ -86,7 +92,20 @@ sudo service nginx restart
 
 ## Nginx配置
 
+修改nginx.conf 配置文件 将以下2行取消注释
+
+``` bash
+include /etc/nginx/conf.d/*.conf;
+include /etc/nginx/sites-enabled/*;
+```
+
 ### 静态网站基本配置
+
+修改配置，在／etc/nginx/conf.d 目录下，新建文件
+
+```bash
+sudo vi ykpine-com-8081.conf
+```
 
 ```js
 upstream website {

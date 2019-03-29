@@ -5,8 +5,6 @@
     "deploy": "bash deploy.sh"
   },
   "devDependencies": {
-    "pug": "^2.0.3",
-    "pug-plain-loader": "^1.0.0",
-    "vuepress": "next"
+    "vuepress": "^0.14.10"
   }
 }

@@ -106,7 +106,11 @@ const add5 = x => x + 5
 const multiply = (x, y) => x * y
 const multiplyAndAdd5 = pipeFunctions(multiply, add5)
 const res = multiplyAndAdd5(5, 2) // 15
+```
 
+普通函数写法
+
+```js
 var pipeFunctions = function() {
   var fns = []
 
@@ -141,9 +145,11 @@ var pipeFunctions = function pipeFunctions() {
 **promisify**
 转换异步函数以返回promise
 
-```js 
+```js
+// 箭头函数写法
 const promisify = func => (...args) => new Promise((resolve, reject) => func(...args, (err, result) => (err ? reject(err) : resolve(result))))
 
+// 普通函数写法
 var promisify = function(func) {
   
   return function() {
@@ -181,6 +187,7 @@ const spreadOver = fn => argsArr => fn(...argsArr)
 const arrayMax = spreadOver(Math.max)
 arrayMax([1, 2, 3, 4])
 
+// 普通函数写法
 function _toConsumableArray(arr) {
   if(Array.isArray(arr)) {
     for(var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {

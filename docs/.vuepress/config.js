@@ -9,8 +9,7 @@ module.exports = {
     displayAllHeaders: true,
     nav: [
       { text: 'Code', link: '/' },
-      { text: 'Note', link: '/note/' },
-      { text: 'Examples', link: '/exam/' },
+      { text: 'Note', link: '/note/trouble/' },
       { text: 'Math', link: '/math/' },
       { text: 'Get it', 
         items: [
@@ -22,30 +21,22 @@ module.exports = {
     ],
     sidebar: {
       '/note/': [
-        '/note/atom',
+        '/note/',
         '/note/centos',
         '/note/deploy',
         '/note/editor',
         '/note/git',
         '/note/gitbook',
-        '/note/gulp',
         '/note/interview',
         '/note/mongodb',
         '/note/nginx',
         '/note/nvm',
         '/note/pm2',
-        '/note/pwa',
-        '/note/rnapp',
         '/note/ssh',
-        '/note/sw',
-        '/note/trouble',
-        '/note/vim'
+        '/note/rnapp',
       ],
       '/math/': [
         '/math/',
-      ],
-      '/exam/': [
-        '/exam/',
       ],
       '/getit/': [
         '/getit/',
@@ -90,15 +81,20 @@ module.exports = {
           title: 'Algorithm',
           children: [
             '/code/algorithm/',
+            '/code/algorithm/dictionary',
+            '/code/algorithm/divideBy2',
+            '/code/algorithm/doublyLinkedList',
+            '/code/algorithm/graphic',
+            '/code/algorithm/hashTable',
+            '/code/algorithm/hashTableLinkedList',
+            '/code/algorithm/linkedList',
+            '/code/algorithm/loopLinkedList',
+            '/code/algorithm/priorityQueue',
             '/code/algorithm/queue',
-            '/code/algorithm/Stack',
-            '/code/algorithm/LinkedList',
-            '/code/algorithm/DoublyLinkedList',
-            '/code/algorithm/Set',
-            '/code/algorithm/Dictionary',
-            '/code/algorithm/Tree',
-            '/code/algorithm/Graphic',
-            '/code/algorithm/Sort',
+            '/code/algorithm/stack',
+            '/code/algorithm/set',
+            '/code/algorithm/sort',
+            '/code/algorithm/tree'
           ]
         },
         {
