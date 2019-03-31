@@ -4,3 +4,7 @@ let foo = bar
 // foo = 19
 
 console.log(foo)
+
+function abc() {
+
+}
