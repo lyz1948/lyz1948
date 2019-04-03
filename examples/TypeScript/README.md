@@ -209,12 +209,12 @@ var arr2 = [1, 2, 3, 4, 5]
 foo(...arr2) // 1, 2, 3
 ```
 
-generator函数
+generator 函数
 
 ```js
 function* count() {
   var a = 1
-  
+
   yield
 
   a++
@@ -225,7 +225,7 @@ it.next() // 1
 it.next() // 2
 
 function* getStockPrice(stock) {
-  while(trur) {
+  while (trur) {
     yield Math.random() * 100
   }
 }
@@ -234,7 +234,7 @@ let gp = getStockPrice()
 let limitPirce = 30
 let price = 100
 
-while(price > limitPrice) {
+while (price > limitPrice) {
   price = gp.next().value
   console.log(`price is ${price}`)
 }
