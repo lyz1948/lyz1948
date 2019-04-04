@@ -1,8 +1,8 @@
-# ES6语法与新特性
+# ES6 语法与新特性
 
 ### 解构数组
 
-``` js
+```js
 function breakfast() {
   return ['dessert', 'coffee', 'apple']
 }
@@ -14,20 +14,20 @@ console.log(dessert, drink, fruit)
 
 ### 解构对象
 
-``` js
+```js
 function breakfast() {
-  return {dessert: 'cookie', drink: 'tea', fruit: 'apple'}
+  return { dessert: 'cookie', drink: 'tea', fruit: 'apple' }
 }
 
-let {dessert: dessert, drink: drink, fruit: fruit} = breakfast()
+let { dessert: dessert, drink: drink, fruit: fruit } = breakfast()
 
 console.log(dessert, drink, fruit)
 ```
 
 ### 解构参数
 
-``` js
-function breakfast(dessert, drink, {location, restaurant} = {}) {
+```js
+function breakfast(dessert, drink, { location, restaurant } = {}) {
   console.log(dessert, drink, location, restaurant)
 }
 
@@ -70,7 +70,7 @@ function kitchen(strings, ...values) {
 
 ### 判断是否包含其他字符串
 
-``` js
+```js
 let dessert = 'cake'
 let drink = 'tea'
 
@@ -83,8 +83,8 @@ console.log(breakfast.includes('apple')) // 是否包含‘apple’
 
 ### 默认参数
 
-``` js
-function breakfast(dessert= 'cake', drink: 'water') {
+```js
+function breakfast(dessert = 'cake', drink: 'water') {
   return `${dessert} + ${drink} `
 }
 
@@ -94,7 +94,7 @@ console.log(breakfast('cookie', 'coffee'))
 
 ### 展开操作符
 
-``` js
+```js
 var fruit = ['apple', 'pear']
 var food = ['milk', ...fruit]
 
@@ -103,9 +103,9 @@ console.log(...fruit) // apple pear
 console.log(food) // ['milk', 'apple', 'pear']
 ```
 
-### reset剩余操作符
+### reset 剩余操作符
 
-``` js
+```js
 function breakfast(dessert, drink, ...foods) {
   console.log(dessert, drink, foods)
 }
@@ -116,12 +116,12 @@ function breakfast(dessert, drink, ...foods) {
   console.log(dessert, drink, ...foods)
 }
 
-breakfast('cake', 'tea', 'apple', 'pear')  // ['cake', 'tea', 'apple', 'pear']
+breakfast('cake', 'tea', 'apple', 'pear') // ['cake', 'tea', 'apple', 'pear']
 ```
 
 ### 函数的名字
 
-``` js
+```js
 function breakfast() {}
 console.log(breakfast.name) // breakfast
 
@@ -134,7 +134,7 @@ console.log(breakfast.name) // superBreakfast
 
 ### 箭头函数
 
-``` js
+```js
 let breakfast = food => food
 //等同于与
 let breakfast = function(food) {
@@ -145,7 +145,7 @@ let breakfast = function(food) {
 let breakfast = (food, drink) => food + drink
 
 // 如果不是直接返回参数需要用大括号
-let breakfast = (food) => {
+let breakfast = food => {
   let eat = '吃' + food
   console.log(eat)
 }
@@ -153,7 +153,7 @@ let breakfast = (food) => {
 
 ### 对象表达式
 
-``` js
+```js
 let dessert = 'cake'
 let drink = 'coffee'
 
@@ -168,18 +168,19 @@ let food = {
 }
 ```
 
-### 对比2个值是否相等
+### 对比 2 个值是否相等
 
-``` js
+```js
 NaN === NaN // false
-Object.is(NaN, NaN) //  true
-+0 === -0 // true
-Object.is(+0, -0)   // false
+Object.is(NaN, NaN) + //  true
+  0 ===
+  -0 // true
+Object.is(+0, -0) // false
 ```
 
 ### 对象复制
 
-``` js
+```js
 let breakfast = {}
 
 Object.assign(breakfast, { drink: 'tea' })
@@ -188,15 +189,15 @@ console.log(breakfast)
 
 ### prototypeOf
 
-``` js
+```js
 let breakfast = {
-  drink () {
+  drink() {
     return 'mikl'
   }
 }
 
 let dinner = {
-  drink () {
+  drink() {
     return 'beer'
   }
 }
@@ -210,9 +211,9 @@ console.log(party.drink) // beer
 console.log(Object.getPrototypeOf(party) === breakfast) // false
 ```
 
-### __proto__
+### **proto**
 
-``` js
+```js
 let breakfast = {
   drink() {
     return 'milk'
@@ -239,7 +240,7 @@ console.log(Object.getPrototypeOf(party) === dinner) // true
 
 ### super
 
-``` js
+```js
 let breakfast = {
   drink() {
     return 'milk'
@@ -264,13 +265,13 @@ party.getDrink() // milk + tea
 
 ### iterators
 
-``` js
+```js
 function g(goods) {
   let i = 0
 
   return {
     next() {
-      let done = (i >= goods.length)
+      let done = i >= goods.length
       let value = !done ? goods[i++] : undefind
 
       return {
@@ -296,7 +297,7 @@ console.log('4=>', it.next().value)
 
 ### generator
 
-``` js
+```js
 function gen(foods) {
   for(let i = 0; i < foods.length; i++) {
     yield foods[i]
@@ -311,13 +312,13 @@ g.next() // undefind
 
 ### class 类
 
-``` js
+```js
 class Chef {
   constructor(food) {
     this.food = food
   }
 
-  cook () {
+  cook() {
     console.log(this.food)
   }
 }
@@ -326,16 +327,16 @@ let fanwei = new Cher('tomato')
 fanwei.cook()
 ```
 
-### 类的get 与 set
+### 类的 get 与 set
 
-``` js
+```js
 class Chef {
   constructor(food) {
     this.food = food
     this.dish = []
   }
 
-  get menu () {
+  get menu() {
     return this.dish
   }
 
@@ -349,14 +350,14 @@ class Chef {
 }
 
 var fanwei = new Chef()
-console.log(fanwei.menu = 'beef')
-console.log(fanwei.menu = 'chicken')
+console.log((fanwei.menu = 'beef'))
+console.log((fanwei.menu = 'chicken'))
 console.log(fanwei.menu)
 ```
 
 ### 静态方法
 
-``` js
+```js
 class Chef {
   constructor(food) {
     this.food = food
@@ -372,9 +373,9 @@ Chef.cook('potato')
 
 ### extends 继承
 
-``` js
+```js
 class Person {
-  constructor(name, age){
+  constructor(name, age) {
     this.name = name
     this.age = age
   }
@@ -396,7 +397,7 @@ who.introduce()
 
 ### Set
 
-``` js
+```js
 let bjx = new Set('zhao qian sun li')
 bjx.add('wang')
 bjx.add('liu')
@@ -412,4 +413,51 @@ bjx.forEach(item => {
 
 bjx.clear()
 console.log(bjx)
+```
+
+### entries
+
+```js
+const obj = { a: '123', b: '456', c: '789' }
+
+for (let [key, val] of Object.entries(obj)) {
+  console.log(`key: ${key}, value: ${val}`)
+}
+```
+
+### values
+
+```js
+const obj = { a: '123', b: '456', c: '789' }
+
+const arr = Object.values(obj)
+console.log(arr) // [123, 456, 789]
+```
+
+### padStart
+
+```js
+let str = 'abc'
+
+str.padStart(10) // '       abc'
+str.padStart(5, 'foo') // foabc
+str.padStart(8, '0') // 00000abc
+
+if (!String.prototype.padStart) {
+  String.prototype.padStart = function padStart(targetLength, padString) {
+    // 转换为数字 或 0
+    targetLength = targetLength >> 0
+    padString = String(typeof padStaring !== 'undefined' ? padString : ' ')
+
+    if (this.length > targetLength) {
+      return String(this)
+    } else {
+      targetLength = targetLength - this.length
+      if (targetLength > padString.length) {
+        padString += padString.repeat(targetLength / padString.length)
+      }
+      return padString.slice(0, targetLength) + String(this)
+    }
+  }
+}
 ```

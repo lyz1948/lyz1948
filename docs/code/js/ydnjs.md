@@ -2,6 +2,22 @@
 
 ## don't do this
 
+字符串转数字 `>>`
+
+```js
+let r = '10' >> 0
+console.log(typeof r) // number
+
+r = 'abc' >> 0
+console.log(r) // 0
+```
+
+平方数
+
+```js
+const r = 2 ** 10
+```
+
 条件判断
 
 ```js
