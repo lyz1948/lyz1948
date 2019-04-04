@@ -2,14 +2,16 @@ module.exports = {
   title: "lyz",
   description: 'lyz的学习记录',
   head: [
-    ['link', { rel: 'icon', href: '/logo.png' }]
+    ['link', { rel: 'manifest', href: '/manifest.json' }],
+    ['link', { rel: 'apple-touch-icon', href: '/img/logo.png' }],
   ],
-  base: '/lyz1948/',
+  base: '/',
+  serviceWorker: true,
   themeConfig: {
     displayAllHeaders: true,
     nav: [
       { text: 'Code', link: '/' },
-      { text: 'Note', link: '/note/trouble/' },
+      { text: 'Note', link: '/note/' },
       { text: 'Math', link: '/math/' },
       { text: 'Get it', 
         items: [
