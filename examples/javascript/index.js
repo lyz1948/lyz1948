@@ -1,10 +1,7 @@
-const bar = 1
-let foo = bar
+import { a, modify } from './b.js'
 
-// foo = 19
+console.log(a)
 
-console.log(foo)
+modify()
 
-function abc() {
-
-}
+console.log(a)

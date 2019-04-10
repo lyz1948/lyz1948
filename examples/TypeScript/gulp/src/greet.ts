@@ -1,3 +1,3 @@
 export function greeter(name: string) {
-  return `hello from ${name}`
+  return `hi from ${name}`
 } 

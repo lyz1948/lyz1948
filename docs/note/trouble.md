@@ -1,5 +1,31 @@
 # 坑
 
+javascript中一些地方不加分号导致的问题
+
+```js
+var a = []
+[1, 3, 4, 5].forEach(it => console.log(it))
+```
+
+上面的代码会报错`Cannot read property 'forEach' of undefined`，因为 `var a = []`不会自动插入分号，导致代码变成下面这样
+
+```js
+var a = [][1, 3, 4, 5].forEach(it => console.log(it))
+```
+
+自动执行函数也不会自动添加分号，程序会认为第二个自动执行函数是第一个自执行函数的参数
+
+```js
+(function(a) {
+  console.log(a)
+})()
+(function(b) {
+  console.log(b)
+})()
+```
+
+
+
 升级 Mojave 后打开 iTerm 变慢的解决办法
 打开 iTrem 的 Preferences -> General，把 GPU rendering 选项前的勾去掉就解决了
 

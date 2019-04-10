@@ -1,7 +1,9 @@
-interface Position {
-  readonly x: number
-  readonly y: number
+interface StringArray {
+  [index: number]: string
 }
 
-const pos: Position = { x: 10, y: 20 }
-console.log(pos)
+let mystr: StringArray
+mystr = ['joe', 'bob']
+
+let str = mystr[0]
+console.log(str)

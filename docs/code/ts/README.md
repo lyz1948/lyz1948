@@ -446,3 +446,67 @@ search = function(src: string, sub: string): boolean {
   return res > -1
 }
 ```
+
+可索引的类型
+
+```js
+interface StringArray {
+  [index: number]: string
+}
+
+let mystr: StringArray
+mystr = ['joe', 'bob']
+
+let str = mystr[0]
+```
+
+类类型
+
+```js
+interface IClock {
+  currentData: Date
+  setTime(d: Date)
+}
+
+class Class implements IClock {
+  currentDate: Date
+  setTime(d: Date) {
+    this.currentDate = d
+  }
+
+  constructor(h: number, m: number) { }
+}
+```
+
+### 命名空间
+
+```js
+(function(something) {
+  something.foo = 123;
+})(something || (something = {}));
+
+console.log(something);
+// { foo: 123 }
+
+(function(something) {
+  something.bar = 456;
+})(something || (something = {}));
+
+console.log(something); // { foo: 123, bar: 456 }
+```
+
+上面的IIFE函数得到的结果，不是我们想要的
+
+```js
+namespace Utility {
+  export function log(msg) {
+    console.log(msg)
+  }
+  export function error(msg) {
+    console.log(msg)
+  }
+}
+
+Utility.log('Call me')
+Utility.error('maybe')
+```
