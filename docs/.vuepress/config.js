@@ -8,6 +8,7 @@ module.exports = {
   base: '/',
   serviceWorker: true,
   themeConfig: {
+    sidebarDepth: 4,
     displayAllHeaders: true,
     nav: [
       { text: 'Code', link: '/' },

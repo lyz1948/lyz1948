@@ -4,4 +4,5 @@ docs/.vuepress/*
 */node_modules
 *.map
 examples/**/node_modules
+examples/**/dist
 package-lock.json
