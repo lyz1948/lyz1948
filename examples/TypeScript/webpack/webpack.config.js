@@ -1,7 +1,11 @@
+const path = require('path')
+
 module.exports = {
+  mode: 'development',
   entry: "./src/index.tsx",
   output: {
     filename: "bundle.js",
+    libraryTarget: "umd", // universal module definition
     path: __dirname + "/dist"
   },
   devtool: "sourceMap",
@@ -18,5 +22,10 @@ module.exports = {
   externals: {
     "react": "React",
     "react-dom": "ReactDOM"
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 5000
   }
 }

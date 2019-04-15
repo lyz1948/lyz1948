@@ -120,6 +120,69 @@ let pickedCard = cardPicker()
 console.log(`card: ${pickedCard.card} of ${pickedCard.suit}`)
 ```
 
+上面的`this`指向已经修正了，不过，`typescript`会给出一条警告，如果`tsconfig.json`里配置了`noImplicitThis`标记的话，它会指出`this.suits[pickedSuit]`里的this的类型为`any`
+
+### `this` 参数
+
+```js
+function func(this: void) {
+
+}
+```
+
+为`Card` 和 `Deck`创建接口
+
+```js
+interface Card {
+  suit: string
+  card: number
+}
+
+interface Deck {
+  suits: string[]
+  cards: number[]
+  createCardPicker(this: Deck): () => Card
+}
+
+let deck: Deck = {
+  suits: ['hearts', 'spades', 'clubs', 'diamonds'],
+  cards: Array(52),
+  createCardPicker: function(this: Deck) {
+    return () => {
+      let pickedCard = Math.floor(Math.random() * 52)
+      let pickedSuit = Math.floor(pickCard / 13)
+
+      return {
+        suit: this.suits[pickedSuit],
+        card: pickedCard % 13
+      }
+    }
+  }
+}
+
+let cardPicker = deck.createCardPicker()
+let pickCard = cardPicker()
+
+console.log(`card: ${pickedCard2.card} of ${pickedCard2.suit}`)
+```
+
+```js
+interface UIElement {
+  addClickListener(onclick: (this: void, e: Event) => void) => void
+}
+
+class Handler {
+  info: string
+  onClickBind(this: void, e: Event) {
+    this.info = e.message
+  }
+}
+
+let uiElment: UIElement
+const h = new Handler()
+uiElment.addClickListener(h.onClickBind)
+```
+
 ### 重载
 
 ```js
