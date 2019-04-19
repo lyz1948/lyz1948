@@ -63,4 +63,104 @@ enum E2 {
   A = 1, B, C
 }
 
+
+enum FileAccess {
+  // 常量成员
+  None,
+  Read = 1 << 1,
+  Write = 1 << 2,
+  ReadWrite = Read | Write,
+  // 计算成员
+  G = 'abcd'.length
+}
 ```
+
+### 联合枚举成员的类型
+
+```js
+enum ShapeKind {
+  Circle,
+  Square
+}
+
+interface Circle {
+  kind: ShapeKind.Circle
+  radius: number
+}
+
+interface Square {
+  kind: ShapeKind.Square
+  sideLength: number
+}
+
+let c: Circle = {
+  kind: ShapeKind.Square,
+  // error
+  radius: 25
+}
+```
+
+### 运行时枚举
+
+```js
+enum E {
+  X, Y, Z
+}
+
+function fn(obj: { X: number }) {
+  return obj.X
+}
+
+fn(E)
+```
+
+### 反向映射
+
+```js
+enum Enum {
+  A
+}
+
+let a = Enum.A
+let nameOfA = Enum[a]
+
+```
+
+### 常量枚举
+
+```js
+const enum Enum {
+  A = 1,
+  B = A * 2
+}
+
+const enum Directions {
+  Up,
+  Down,
+  Left,
+  Right
+}
+
+let directions = [
+  Direction.Up,
+  Direction.Down,
+  Direction.Left,
+  Direction.Right
+]
+
+// 编译后生成的代码
+var directions = [0 /* Up */, 1 /* Down */, 2 /* Left */, 3 /* Right */]
+
+```
+
+### 外部枚举
+
+```js
+declare enum Enum {
+  A = 1,
+  B,
+  C = 2
+}
+```
+
+外部枚举和内部枚举的区别，正常情况下，没有初始化的方法成员被当成常数成员，而非常量成员没有初始化方法被当做需要计算的成员

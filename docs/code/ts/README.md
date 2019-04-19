@@ -510,3 +510,81 @@ namespace Utility {
 Utility.log('Call me')
 Utility.error('maybe')
 ```
+
+### 类型兼容性
+
+结构化类型系统的基本规则：如果x 要兼容 y， 那么y 至少具有与x相同的属性
+
+```js
+interface Named {
+  name: string
+}
+
+let x: Named
+
+let y = { name: 'Peppa', location: 'Seattle' }
+x = y
+
+```
+
+要检查y 能否赋值个x，编译器检查x中的每个属性，看是否能在y中也能找到对应的属性
+
+检查函数参数时使用相同的规则：
+
+```js
+function greet(n: Named) {
+  console.log(n.name)
+}
+
+greet(y)
+```
+
+### 函数类型比较
+
+```js
+let x = (a: number) => 0
+let y = (b: number, s: string) => 0
+
+y = x  // ok
+x = y  // error
+```
+
+x 赋值给 y 是成功的，只要x的每个参数能在y里找到对应的类型参数就可以，参数名字相同与否并无关系，只要类型相同即可。
+但y 赋值给 x 的时候出错了，因为y里的第二个参数，在x里并没有找到对应的类型参数
+
+返回值判断
+
+```js
+let x = () => ({ name: 'Peppa' })
+let y = () => ({ name: 'Peppa', location: 'England' })
+
+x = y // ok
+y = x // error
+```
+
+系统强制源函数的返回类型必须是目标函数返回值类型的子类型
+
+### 函数参数的双向协变
+
+```js
+enum EventType { Mouse, Keyboard }
+
+interface Event { timestamp: number }
+interface MouseEvent extends Event { x: number, y: number }
+interface KeyEvent extends Event { keyCode: number }
+
+function listenEvent(eventType: EventType, handler: (n: Event) => void) {
+
+})
+
+// 不健全的，但用的很普遍
+listenEvent(eventType.Mouse, (e: MouseEvent) => console.log(e.x + ',' + e.y) )
+
+// 不受欢迎的可靠的替代方案
+listenEvent(eventType.Mouse, (e: Event) => console.log( (<MouseEvent>e).x + ',' + (<MouseEvent>e).y ))
+
+listenEvent(eventType.Mouse, <(e: Event) => void> ((e: MouseEvent) => console.log(e.x + ',' + e.y)))
+
+// 仍然不允许(明显错误)类型安全强制为完全不兼容的类型
+listenEvent(EventType.Mouse, (e: number) => console.log(e))
+```
