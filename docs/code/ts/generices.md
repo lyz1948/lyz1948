@@ -1,10 +1,4 @@
----
-title: 泛型
-sidebarDepth: 2
-sidebar: false
----
-
-## 泛型
+# 泛型
 
 ### 创建一个泛型
 
@@ -13,11 +7,11 @@ function identity<T>(arg: T): T {
   return arg
 }
 
-let output = identity<string>('str')
+let output = identity < string > 'str'
 let output = identity('str')
 ```
 
-我们不需要使用`<>`来明确传入的类型，编译器会帮我们检查，根据传入类型在设置T的类型。如果编译器不能自动推断类型的话，在明确传入T的类型
+我们不需要使用`<>`来明确传入的类型，编译器会帮我们检查，根据传入类型在设置 T 的类型。如果编译器不能自动推断类型的话，在明确传入 T 的类型
 
 ```js
 function identity<T>(args: T): T {
@@ -30,7 +24,7 @@ function logIdentity<T>(args: T): T {
 }
 ```
 
-如果我们在不指定args类型的情况下，直接使用args.length会有问题，因为可能是数字或其他没有length属性的类型
+如果我们在不指定 args 类型的情况下，直接使用 args.length 会有问题，因为可能是数字或其他没有 length 属性的类型
 
 ```js
 function logIdentity<T>(args: Array<T>): Array<T> {
@@ -54,7 +48,7 @@ let myIdentity: { <T>(args: T): T } = identity
 
 ```js
 interface identityFn {
-  <T>(args: T): T
+  <T>(args: T): T;
 }
 
 function identity<T>(args: T): T {
@@ -68,7 +62,7 @@ const myIdentity: identityFn = identity
 
 ```js
 interface identityFn<T> {
-  (args: T): T
+  (args: T): T;
 }
 
 const myIdentity: identityFn<number> = identity
@@ -116,7 +110,7 @@ queue.push(10)
 queue.push('20') // 提示无法push一个非数字类型的元素
 ```
 
-上面的方式，解决了不允许push不同非number类型的元素到数组，如果我们希望创建字符串队列的时候，那就需要从新修改代码，这不符合开放封闭原则
+上面的方式，解决了不允许 push 不同非 number 类型的元素到数组，如果我们希望创建字符串队列的时候，那就需要从新修改代码，这不符合开放封闭原则
 
 ```js
 class Queue<T> {
@@ -134,7 +128,7 @@ queue.push('9') // 只能push 数字类型的元素
 ```js
 function reverse<T>(items: T[]): T[] {
   const res = []
-  for (let i = items.length - 1; i >=0; i--) {
+  for (let i = items.length - 1; i >= 0; i--) {
     res.push(items[i])
   }
   return res
@@ -162,7 +156,7 @@ class Utils {
 
 ```js
 const getJson = <T>(config: {
-  url: string;
+  url: string,
   headers?: {
     [key: string]: string
   }
@@ -173,7 +167,7 @@ const getJson = <T>(config: {
     'Content-Type': 'application/json',
     ...(config.headers || {})
   }
-  return fetch(config.url, opts).then<T>(res => res.json())
+  return fetch(config.url, opts).then < T > (res => res.json())
 }
 ```
 
@@ -213,7 +207,7 @@ myGenericNumber.add = function(x, y) {
 }
 ```
 
-使用GenericNumber类的方式非常的直观，限制该方法只能传入数字类型，同理，我们也可以传入字符串
+使用 GenericNumber 类的方式非常的直观，限制该方法只能传入数字类型，同理，我们也可以传入字符串
 
 ```js
 let myGenericString = new GenericFn<string>()

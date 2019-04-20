@@ -1,10 +1,4 @@
----
-title: Class
-sidebarDepth: 2
-sidebar: false
----
-
-## 类
+# Class 类
 
 ```js
 class Person {
@@ -18,7 +12,7 @@ class Person {
 ```js
 class Fruit {
   constructor(name: string) {
-    this.name = name  
+    this.name = name
   }
   buy(price: number = 0) {
     console.log(`this ${this.name} sale ${price} $`)
@@ -71,8 +65,8 @@ class Horse extends Animal {
   }
 }
 
-let sam = new Snake("Sammy the Python");
-let tom: Animal = new Horse("Tommy the Palomino");
+let sam = new Snake('Sammy the Python')
+let tom: Animal = new Horse('Tommy the Palomino')
 
 sam.move()
 tom.move(34)
@@ -256,9 +250,8 @@ class Point {
 }
 
 interface Point3d extends Point {
-  z: number
+  z: number;
 }
 
 let point3d: Point3d = { x: 1, y: 2, z: 3 }
-
 ```
