@@ -13,7 +13,6 @@ module.exports = {
     nav: [
       { text: 'Code', link: '/' },
       { text: 'Note', link: '/note/' },
-      // { text: 'Math', link: '/math/' },
       {
         text: 'Get it',
         items: [
@@ -39,14 +38,11 @@ module.exports = {
         '/note/ssh',
         '/note/rnapp',
       ],
-      '/math/': [
-        '/math/',
-      ],
       '/getit/': [
         '/getit/',
         '/getit/finance/',
         '/getit/economics/',
-        '/getit/literature/',
+        '/getit/literature/'
       ],
       '/': [
         '/code/ts/',
@@ -74,18 +70,6 @@ module.exports = {
             '/code/js/class',
           ]
         },
-        // {
-        //   title: 'TypeScript',
-        //   children: [
-        //     '/code/ts/',
-        //     '/code/ts/class',
-        //     '/code/ts/enums',
-        //     '/code/ts/func',
-        //     '/code/ts/generices',
-        //     // '/code/ts/internce',
-        //     // '/code/ts/string'
-        //   ]
-        // },
         {
           title: 'Algorithm',
           children: [
