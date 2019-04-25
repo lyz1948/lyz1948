@@ -1,4 +1,4 @@
-# 正确的使用JS
+# goodjs
 
 ```js
 const good = {

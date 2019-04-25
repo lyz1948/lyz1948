@@ -65,6 +65,16 @@ const capitalize = (str, lowerRest = false) =>
 将字符串转换为 toLowerCase（），并使用 replace（）从中删除非字母的字符。然后，将其转换为 tolowerCase（），将（’‘）拆分为单独字符，reverse（），join（’‘），与原始的非反转字符串进行比较，然后将其转换为 tolowerCase（）。
 
 ```js
+function isPalindrome(text) {
+  if (text.length <= 1) {
+    return true
+  }
+  if (text.charAt(0) != text.charAt(text.length - 1)) return false
+
+  return isPalindrome(text.substr(1, text.length - 2))
+}
+
+// 更简洁的方式
 const palindrome = str => {
   const s = str.toLowerCase().replace(/[\W_]/g, '')
   return (
@@ -169,7 +179,7 @@ const isEven = num => num % 2 === 0
 使用递归。如果 n 小于或等于 1，则返回 1。否则返回 n 和 n – 1 的阶乘的乘积。
 
 ```js
-const factorial = n => n <= 1 ? :  n * factorial(n-1)
+const factorial = n => (n <= 1 ? 1 : n * factorial(n - 1))
 ```
 
 ## 斐波那契数组生成器
@@ -483,19 +493,6 @@ function getElements(name) {
 }
 ```
 
-## 回文
-
-```js
-function isPalindrome(text) {
-  if (text.length <= 1) {
-    return true
-  }
-  if (text.charAt(0) != text.charAt(text.length - 1)) return false
-
-  return isPalindrome(text.substr(1, text.length - 2))
-}
-```
-
 ## 格式化时间
 
 ```js
@@ -521,7 +518,7 @@ function formatNumber(n) {
 }
 
 module.exports = {
-  formatTime: formatTime
+  formatTime
 }
 ```
 
@@ -722,17 +719,6 @@ Array.prototype.find = function(val) {
 }
 ```
 
-## 柯里化函数求值
-
-```js
-var cost = (function() {
-  var args = []
-
-  if (arguments.lenght === 0) {
-  }
-})()
-```
-
 ## toString 判断类型
 
 ```js
@@ -805,15 +791,15 @@ var mult = (function() {
   var cache = {}
   return function() {
     var args = Array.prototype.join.call(arguments, ',')
-    if(args in cache) {
+    if (args in cache) {
       return cache[args]
     }
     var a = 1
-    for(var i = 0, l = arguments.length; i < l; i++) {
+    for (var i = 0, l = arguments.length; i < l; i++) {
       a *= arguments[i]
     }
 
-    return cache[args] = a
+    return (cache[args] = a)
   }
 })()
 
@@ -822,7 +808,7 @@ var mult = (function() {
 
   var calculate = function() {
     var a = 1
-    for(var i = 0, l = arguments.length; i <l; i++) {
+    for (var i = 0, l = arguments.length; i < l; i++) {
       a = a * arguments[i]
     }
     return a
@@ -830,21 +816,20 @@ var mult = (function() {
 
   return function() {
     var args = Array.prototype.join.call(arguments, ',')
-    if(args in cache) {
+    if (args in cache) {
       return cache[args]
     }
-    return cache[args] = calculate.apply(null, arguments)
+    return (cache[args] = calculate.apply(null, arguments))
   }
 })()
 
-
 function cached(fn) {
   var cache = Object.create(null)
-  return (functoin cachedFn(str) {
+  return function cachedFn(str) {
     var hit = cache[str]
 
     return hit || (cache[str] = fn(str))
-  })
+  }
 }
 ```
 

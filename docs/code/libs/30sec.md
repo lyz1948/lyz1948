@@ -1689,7 +1689,7 @@ const recorder2 = recordAnimationFrames(cb, false) // `start` needs to be explic
 
 ```js
 const redirect = (url, asLink = true) => {
-   asLink ? window.location.href(url) : window.location.replace(url)
+   asLink ? (window.location.href = url) : window.location.replace(url)
  }
 ```
 

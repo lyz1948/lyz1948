@@ -9,7 +9,7 @@ module.exports = {
   serviceWorker: true,
   themeConfig: {
     sidebarDepth: 2,
-    displayAllHeaders: true,
+    displayAllHeaders: false,
     nav: [
       { text: 'Code', link: '/' },
       { text: 'Note', link: '/note/' },
@@ -48,8 +48,10 @@ module.exports = {
         '/code/ts/',
         '/code/koa/',
         '/code/ramda/',
-        '/code/tools/',
-        '/code/tools/30sec',
+        '/code/libs/',
+        '/code/libs/goodjs',
+        '/code/libs/ydnjs',
+        '/code/libs/30sec',
         '/code/designPatterns/',
         {
           title: 'JavaScript',

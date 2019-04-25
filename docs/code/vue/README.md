@@ -2,22 +2,18 @@
 
 ## 插件开发方法
 
-### vue插件主要代码
+### vue 插件主要代码
 
 ```js
 MyPlugin.install = function(Vue, options) {
   Vue.component('my-component', {
     // 组件内容
   })
-  Vue.prototype.$Notice = function() {
-
-  }
+  Vue.prototype.$Notice = function() {}
   Vue.globalMethod = function() {}
 
   Vue.mixin({
-    mounted: function() {
-
-    }
+    mounted: function() {}
   })
 }
 ```
@@ -33,19 +29,19 @@ Vue.use(MyPlugin)
 Vue.use(MyPlugin, {})
 ```
 
-### vue中央事件总线插件
+### vue 中央事件总线插件
 
 ```js
 const install = function(Vue) {
   const Bus = new Vue({
     methods: {
-      emit (event, ...args) {
+      emit(event, ...args) {
         this.$emit(event, ...args)
       },
-      on (event, cb) {
+      on(event, cb) {
         this.$on(event, cb)
       },
-      off (event, cb) {
+      off(event, cb) {
         this.$off(event, cb)
       }
     }
@@ -59,7 +55,7 @@ export default install
 
 ### 总线插件使用
 
-``` js
+```js
 import Vue from 'vue'
 import Bus from './vue-bus'
 
@@ -94,37 +90,35 @@ export default {
 }
 ```
 
-### vue-ajax插件
+### vue-ajax 插件
 
 ```js
-const ajax = function({options = {}}) {
+const ajax = function({ options = {} }) {
   options.type = (options.type || 'GET').toUpperCase()
 
   const data = []
-  for(let i in options.data) {
+  for (let i in options.data) {
     data.push(encodeURIComponent(i) + '=' + encodeURIComponent(options.data[i]))
   }
   data = data.join('&')
 
   const xhr = new XMLHttpRequest()
   xhr.onreadystatechange = function() {
-    if(xhr.readyState === 4) {
+    if (xhr.readyState === 4) {
       const status = xhr.status
-      if(status >= 200 && status < 300) {
+      if (status >= 200 && status < 300) {
         options.success && options.success(xhr.responseText, xhr.responseXML)
-      }
-      else {
+      } else {
         options.error && options.error(xhr.status)
       }
     }
   }
 
-  if(options.type === 'POST') {
-    xhr.open('POST', options.url, true) 
-    xhr.setRequestHeader('Content-Type','application/x-www.form-urlencoded')
+  if (options.type === 'POST') {
+    xhr.open('POST', options.url, true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www.form-urlencoded')
     xhr.send(data)
-  }
-  else {
+  } else {
     xhr.open('GET', options.url + '?' + data, true)
     xhr.send(null)
   }
@@ -136,7 +130,7 @@ export default ajax
 ### 向上找到任意组件
 
 ```js
-function findComponentUpward (ctx, compName) {
+function findComponentUpward(ctx, compName) {
   let parent = ctx.$parent
   let name = parent.$options.name
 
@@ -151,7 +145,7 @@ function findComponentUpward (ctx, compName) {
 ### 向上找到所有的指定组件
 
 ```js
-function findComponentsUpward (ctx, compName) {
+function findComponentsUpward(ctx, compName) {
   let parents = []
   const parent = ctx.$parent
 
@@ -167,7 +161,7 @@ function findComponentsUpward (ctx, compName) {
 ### 向下找到所有的指定组件
 
 ```js
-function findComponentDownward (ctx, compName) {
+function findComponentDownward(ctx, compName) {
   const childrens = ctx.$children
   let children = null
 
@@ -191,7 +185,7 @@ function findComponentDownward (ctx, compName) {
 ### 找到所有的子组件
 
 ```js
-function findComponentsDownward (ctx, compName) {
+function findComponentsDownward(ctx, compName) {
   return ctx.$children.reduce((components, child) => {
     if (child.$options.name === compName) components.push(child)
     const foundChilds = findComponentsDownward(child, compName)
@@ -203,7 +197,7 @@ function findComponentsDownward (ctx, compName) {
 ### 找到兄弟组件
 
 ```js
-function findBrothersComponents (ctx, compName, exceptMe = true) {
+function findBrothersComponents(ctx, compName, exceptMe = true) {
   let res = ctx.$parent.$children.filter(item => {
     return item.$options.name === compName
   })
