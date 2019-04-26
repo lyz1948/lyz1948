@@ -1,6 +1,6 @@
 # You don't know js
 
-## don't do this
+**don't do this**
 
 字符串转数字 `>>`
 
@@ -133,7 +133,7 @@ false = [];
 这时最好用 === 来避免不经意的强制类型转换。这两个原则可以让我们避开几乎所有强制
 类型转换的坑。
 
-### IIFE
+**IIFE**
 
 ```js
 var a = 2(function IIFE(global) {

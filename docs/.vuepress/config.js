@@ -1,15 +1,16 @@
 module.exports = {
-  title: "lyz",
-  description: 'lyz的学习记录',
+  title: "lyz的学习记录",
+  description: '记录和整理生活、工作与学习的知识，致力成为一名终身学习者！',
   head: [
     ['link', { rel: 'manifest', href: '/manifest.json' }],
     ['link', { rel: 'apple-touch-icon', href: '/img/logo.png' }],
   ],
   base: '/',
+  docsDir: 'docs',
   serviceWorker: true,
   themeConfig: {
     sidebarDepth: 2,
-    displayAllHeaders: false,
+    displayAllHeaders: true,
     nav: [
       { text: 'Code', link: '/' },
       { text: 'Note', link: '/note/' },
@@ -46,17 +47,9 @@ module.exports = {
       ],
       '/': [
         '/code/ts/',
-        '/code/koa/',
-        '/code/ramda/',
-        '/code/libs/',
-        '/code/libs/goodjs',
-        '/code/libs/ydnjs',
-        '/code/libs/30sec',
-        '/code/designPatterns/',
         {
           title: 'JavaScript',
           children: [
-            '/code/js/',
             '/code/js/string',
             '/code/js/types',
             '/code/js/variable',
@@ -70,12 +63,13 @@ module.exports = {
             '/code/js/this',
             '/code/js/es6',
             '/code/js/class',
+            '/code/js/'
           ]
         },
         {
           title: 'Algorithm',
           children: [
-            '/code/algorithm/',
+            ['/code/algorithm/', '数据结构与算法'],
             '/code/algorithm/dictionary',
             '/code/algorithm/divideBy2',
             '/code/algorithm/doublyLinkedList',
@@ -103,7 +97,14 @@ module.exports = {
             '/code/docker/docker-compose',
             '/code/docker/dockerfile'
           ]
-        }
+        },
+        '/code/designPatterns/',
+        '/code/libs/',
+        '/code/koa/',
+        '/code/ramda/',
+        '/code/libs/30sec',
+        '/code/libs/ydnjs',
+        'code/libs/goodjs'
       ]
     }
   }
