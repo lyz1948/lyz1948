@@ -1,9 +1,10 @@
 # docker-machine
 
-docker-machine 链接虚拟机docker
+docker-machine 链接虚拟机 docker
+
 ## Create
 
-``` bash
+```bash
 // 创建名为`default`的 docker-machine
 docker-machine create -d virtualbox default
 
@@ -20,20 +21,20 @@ docker-machine ip default
 docker run -dp 8000:80 nginx
 
 // curl 查看 nginx启动情况
-curl $(docker-machine ip default):8000
+curl $(docker-machine ip defaucdlt):8000
 ```
 
-然后到浏览器访问 `http://192.168.99.100:8000/` 地址，则可以访问启动了的nginx服务
+然后到浏览器访问 `http://192.168.99.100:8000/` 地址，则可以访问启动了的 nginx 服务
 
 ### Command
 
-开启docker-machine default是机器的名字
+开启 docker-machine default 是机器的名字
 
 ```bash
 docker-machine start default
 ```
 
-在default虚拟机里运行busybox
+在 default 虚拟机里运行 busybox
 
 ```bash
 docker $(docker-machine config default) run busybox echo hello world
@@ -57,13 +58,13 @@ docker-machine stop default
 docker-machine kill
 ```
 
-查看虚拟机的IP
+查看虚拟机的 IP
 
 ```bash
 docker-machine ip default
 ```
 
-当前shell链接到虚拟机
+当前 shell 链接到虚拟机
 
 ```bash
 eval $(docker-machine env)
@@ -93,13 +94,13 @@ docker-machine config
 docker-machine provision
 ```
 
-进入虚拟机的docker
+进入虚拟机的 docker
 
 ```bash
 docker-machine ssh
 ```
 
-查看虚拟机docker的状态
+查看虚拟机 docker 的状态
 
 ```bash
 docker-machine status
@@ -129,19 +130,19 @@ docker-machine url
 docker-machine env -u
 ```
 
-设置DOCKER的变量
+设置 DOCKER 的变量
 
 ```bash
 eval $(docker-machine env -u)
 ```
 
-查看DOCKER变量
+查看 DOCKER 变量
 
 ```bash
 env | grep DOCKER
 ```
 
-设置开机启动名字为default的docker虚拟机
+设置开机启动名字为 default 的 docker 虚拟机
 
 ```bash
 eval $(docker-machine env default)
