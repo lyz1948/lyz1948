@@ -1,30 +1,40 @@
 # 坑
 
-javascript中一些地方不加分号导致的问题
+homebrew 下载慢如何解决？
+其他方式下载，再移入`brew --cache` 文件下
 
 ```js
-var a = []
-[1, 3, 4, 5].forEach(it => console.log(it))
+cd `brew --cace`
+brw install [package-name]
+```
+
+react-native
+
+运行 react-native 工程时，出错：xcrun: error: unable to find utility "instruments", not a developer tool or in PATH
+
+解决方法：在 终端执行如下命令 sudo xcode-select -s /Applications/Xcode.app/Contents/Developer/
+
+javascript 中一些地方不加分号导致的问题
+
+```js
+var a = [][(1, 3, 4, 5)].forEach(it => console.log(it))
 ```
 
 上面的代码会报错`Cannot read property 'forEach' of undefined`，因为 `var a = []`不会自动插入分号，导致代码变成下面这样
 
 ```js
-var a = [][1, 3, 4, 5].forEach(it => console.log(it))
+var a = [][(1, 3, 4, 5)].forEach(it => console.log(it))
 ```
 
 自动执行函数也不会自动添加分号，程序会认为第二个自动执行函数是第一个自执行函数的参数
 
 ```js
-(function(a) {
+;(function(a) {
   console.log(a)
-})()
-(function(b) {
+})()(function(b) {
   console.log(b)
 })()
 ```
-
-
 
 升级 Mojave 后打开 iTerm 变慢的解决办法
 打开 iTrem 的 Preferences -> General，把 GPU rendering 选项前的勾去掉就解决了
@@ -168,7 +178,7 @@ npm install node-sass -g -d
 npm install node-sass --save-dev -d
 ```
 
-## npm镜像设置的3种方式
+## npm 镜像设置的 3 种方式
 
 1.通过 config 命令
 
@@ -208,7 +218,7 @@ PermitRootLogin no
 PasswordAuthenthication no
 ```
 
-## git配置2个账号
+## git 配置 2 个账号
 
 1 生成密匙
 
@@ -246,14 +256,14 @@ git@github.com:lvqinbo/lvqinbo.github.io.git
 git@helloman.com:lvqinbo/lvqinbo.github.io.git
 ```
 
-## Git下载慢的问题解决方法
+## Git 下载慢的问题解决方法
 
 ** 浅克隆 **
 
 > 克隆仓库的时候加上 --depth=1
 > 例如： git clone --depth=1 https://github.com/atom-minimap/minimap.git
 
-## Homebrew安装失败解决方法
+## Homebrew 安装失败解决方法
 
 1 先下载
 2 进入目录 Liblariy/Caches/Homebrew
@@ -264,7 +274,7 @@ git@helloman.com:lvqinbo/lvqinbo.github.io.git
 ## iterm2 闪退问题
 
 这个时候，shell 已经无法使用了。。。
-iterm打开提示：argpath=/usr/local/bin/zsh error=No such file or directory
+iterm 打开提示：argpath=/usr/local/bin/zsh error=No such file or directory
 需要的操作是把/bin/zsh 复制到/usr/local/bin/zsh
 
 ** 具体实现：**
@@ -285,7 +295,7 @@ export NVM_DIR="/Users/admin/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 ```
 
-## 命令行指定sublime打开文件
+## 命令行指定 sublime 打开文件
 
 ** 如果是在默认 shell 下 **
 
@@ -325,7 +335,7 @@ alias nano="subl"
 export EDITOR="subl"
 ```
 
-Windows系统
+Windows 系统
 
 ```bash
 doskey subl="C:\Program Files\Sublime Text 3\sublime_text.exe" $*
