@@ -862,33 +862,33 @@ function Person() {
 
 ## 预定义函数
 
-`eval()`
+**`eval()`**
 
 - `eval()`方法会对一串字符串形式的 JavaScript 代码字符求值
 
-`isFinite()`
+**`isFinite()`**
 `isFinite()`函数判断传入的值是否是有限的数值。 如果需要的话，其参数首先被转换为一个数值
 
-`isNaN()`
+**`isNaN()`**
 `isNaN()` 函数判断一个值是否是`NaN`
 注意：`isNaN`函数内部的强制转换规则十分有趣； 另一个可供选择的是 ECMAScript 6 中定义 Number.isNaN() , 或者使用 typeof 来判断数值类型。
 
-`parseFloat()`
+**`parseFloat()`**
 `parseFloat()` 函数解析字符串参数，并返回一个浮点数。
 
-`parseInt()`
+**`parseInt()`**
 `parseInt()` 函数解析字符串参数，并返回指定的基数（基础数学中的数制）的整数。
 
-`decodeURI()`
+**`decodeURI()`**
 `decodeURI()` 函数对先前经过 encodeURI 函数或者其他类似方法编码过的字符串进行解码。
 
-`ecodeURIComponent()`
+**`ecodeURIComponent()`**
 `decodeURIComponent()`方法对先前经过 encodeURIComponent 函数或者其他类似方法编码过的字符串进行解码。
 
-`encodeURI()`
+**`encodeURI()`**
 `encodeURI()` 方法通过用以一个，两个，三个或四个转义序列表示字符的 UTF-8 编码替换统一资源标识符（URI）的某些字符来进行编码（每个字符对应四个转义序列，这四个序列组了两个”替代“字符）。
 
-`encodeURIComponent()`
+**`encodeURIComponent()`**
 `encodeURIComponent()` 方法通过用以一个，两个，三个或四个转义序列表示字符的 UTF-8 编码替换统一资源标识符（URI）的每个字符来进行编码（每个字符对应四个转义序列，这四个序列组了两个”替代“字符）。
 
 ## 运算符
@@ -978,27 +978,30 @@ x |= y // x = x | y
 var val1 = 1
 var val2 = 2
 
-# 等于 ==
+等于 ==
 val1 == 1
 val1 == '1'
 
-# 不等于 `!=`
+不等于 `!=`
 val1 != '2')
 
-# 全等 ===
+全等 ===
 val1 === 1  // true
 var1 === '1' // false
 
-# 全不等 !==
+全不等 !==
 val2 !== val1
 
-# 大于
+大于
 val1 > val2  // false
-# 大于等于
+
+大于等于
 val1 >= 1 // true
-# 小于
+
+小于
 val1 < val2 // true
-# 小于等于
+
+小于等于
 val1 <= val2  // false
 ```
 
@@ -1977,7 +1980,7 @@ obj2.hide()
 定义`getters`与`setters`
 
 ```js
-var d = Date.prototype;
+var d = Date.prototype
 Object.defineProperty(d, 'year', {
   get: function() {
     return this.getFullYear()
@@ -2001,10 +2004,18 @@ var o = {
 使用 Object.defineProperties 的方法，同样也可以对一个已创建的对象在任何时候为其添加 getter 或 setter 方法。这个方法的第一个参数是你想定义 getter 或 setter 方法的对象，第二个参数是一个对象，这个对象的属性名用作 getter 或 setter 的名字，属性名对应的属性值用作定义 getter 或 setter 方法的函数，下面是一个例子定义了和前面例子一样的 getter 和 setter 方法
 
 ```js
-var o = { a : 1 }
+var o = { a: 1 }
 Object.defineProperties(o, {
-  "b": { get: function() { return this.a + 1 } },
-  "c": { set: function(x) { this.a = x / 2 } }
+  b: {
+    get: function() {
+      return this.a + 1
+    }
+  },
+  c: {
+    set: function(x) {
+      this.a = x / 2
+    }
+  }
 })
 ```
 
@@ -2030,8 +2041,8 @@ delete g
 在 JavaScript 中 objects 是一种引用类型。两个独立声明的对象永远也不会相等，即使他们有相同的属性，只有在比较一个对象和这个对象的引用时，才会返回 true.
 
 ```js
-var fruit = { name: "apple" }
-var fruitbear = { name: "apple" }
+var fruit = { name: 'apple' }
+var fruitbear = { name: 'apple' }
 
 fruit == fruitbear // false
 fruit === fruitbear // false
@@ -2040,7 +2051,7 @@ fruit === fruitbear // false
 两个变量, 同一个对象
 
 ```js
-var fruit = { name: "apple" }
+var fruit = { name: 'apple' }
 var fruitbear = fruit
 
 fruit == fruitbear // true
@@ -2063,7 +2074,7 @@ mark.bonus = 1000
 这样 mark 对象就有了 bonus 属性，而其它 WorkerBee 则没有该属性
 
 - 删除属性
-判断实例的关系
+  判断实例的关系
 
 ## 类`Class`
 
