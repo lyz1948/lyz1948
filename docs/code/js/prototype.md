@@ -228,7 +228,7 @@ hasOwnProperty 是 JavaScript 中唯一处理属性并且不会遍历原型链�
 
 #### 错误实践：扩展原生对象的原型
 
-```bash
+```js
 function A(a){
   this.varA = a;
 }

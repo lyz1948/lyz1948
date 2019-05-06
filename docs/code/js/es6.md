@@ -1,5 +1,7 @@
 # ES6 语法与新特性
 
+## 解构
+
 ### 解构数组
 
 ```js
@@ -34,7 +36,7 @@ function breakfast(dessert, drink, { location, restaurant } = {}) {
 breakfast('cake', 'milk', '广州', '和记餐馆')
 ```
 
-### 字符串模版
+## 字符串模版
 
 ```js
 let name = 'hello'
@@ -81,7 +83,7 @@ console.log(breakfast.endWith('!')) // 是不是以‘！’结尾
 console.log(breakfast.includes('apple')) // 是否包含‘apple’
 ```
 
-### 默认参数
+## 默认参数
 
 ```js
 function breakfast(dessert = 'cake', drink: 'water') {
@@ -92,7 +94,7 @@ console.log(breakfast) // 输出默认值
 console.log(breakfast('cookie', 'coffee'))
 ```
 
-### 展开操作符
+## 展开操作符
 
 ```js
 var fruit = ['apple', 'pear']
@@ -103,7 +105,7 @@ console.log(...fruit) // apple pear
 console.log(food) // ['milk', 'apple', 'pear']
 ```
 
-### reset 剩余操作符
+## reset 剩余操作符
 
 ```js
 function breakfast(dessert, drink, ...foods) {
@@ -119,7 +121,7 @@ function breakfast(dessert, drink, ...foods) {
 breakfast('cake', 'tea', 'apple', 'pear') // ['cake', 'tea', 'apple', 'pear']
 ```
 
-### 函数的名字
+## 有名函数
 
 ```js
 function breakfast() {}
@@ -132,7 +134,7 @@ let breakfast = function superBreakfast() {}
 console.log(breakfast.name) // superBreakfast
 ```
 
-### 箭头函数
+## 箭头函数
 
 ```js
 let breakfast = food => food
@@ -151,7 +153,7 @@ let breakfast = food => {
 }
 ```
 
-### 对象表达式
+## 对象表达式
 
 ```js
 let dessert = 'cake'
@@ -178,7 +180,7 @@ Object.is(NaN, NaN) + //  true
 Object.is(+0, -0) // false
 ```
 
-### 对象复制
+## 对象复制
 
 ```js
 let breakfast = {}
@@ -263,7 +265,7 @@ let party = {
 party.getDrink() // milk + tea
 ```
 
-### iterators
+## iterators
 
 ```js
 function g(goods) {
@@ -295,7 +297,7 @@ console.log('3=>', it.next().value)
 console.log('4=>', it.next().value)
 ```
 
-### generator
+## generator
 
 ```js
 function gen(foods) {
@@ -310,7 +312,7 @@ g.next() // egg
 g.next() // undefind
 ```
 
-### class 类
+## class 类
 
 ```js
 class Chef {
@@ -395,7 +397,7 @@ let who = new Chef('guodegang', 50)
 who.introduce()
 ```
 
-### Set
+## Set
 
 ```js
 let bjx = new Set('zhao qian sun li')
@@ -415,7 +417,7 @@ bjx.clear()
 console.log(bjx)
 ```
 
-### entries
+## entries
 
 ```js
 const obj = { a: '123', b: '456', c: '789' }
@@ -425,7 +427,7 @@ for (let [key, val] of Object.entries(obj)) {
 }
 ```
 
-### values
+## values
 
 ```js
 const obj = { a: '123', b: '456', c: '789' }
@@ -434,7 +436,7 @@ const arr = Object.values(obj)
 console.log(arr) // [123, 456, 789]
 ```
 
-### padStart
+## padStart
 
 ```js
 let str = 'abc'

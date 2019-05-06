@@ -4,7 +4,7 @@ docker-machine 链接虚拟机 docker
 
 ## Create
 
-```bash
+```js
 // 创建名为`default`的 docker-machine
 docker-machine create -d virtualbox default
 
@@ -28,122 +28,122 @@ curl $(docker-machine ip defaucdlt):8000
 
 ### Command
 
-开启 docker-machine default 是机器的名字
+开启 docker-machine default (default是机器的名字)
 
-```bash
+```js
 docker-machine start default
 ```
 
 在 default 虚拟机里运行 busybox
 
-```bash
+```js
 docker $(docker-machine config default) run busybox echo hello world
 ```
 
 重新启动
 
-```bash
+```js
 docker-machine restart
 ```
 
 停止
 
-```bash
+```js
 docker-machine stop default
 ```
 
 停止进程
 
-```bash
+```js
 docker-machine kill
 ```
 
 查看虚拟机的 IP
 
-```bash
+```js
 docker-machine ip default
 ```
 
 当前 shell 链接到虚拟机
 
-```bash
+```js
 eval $(docker-machine env)
 ```
 
 查看环境变量
 
-```bash
+```js
 docker-machine env default
 ```
 
 查看机器的详细信息
 
-```bash
+```js
 docker-machine inspect default
 ```
 
 配置信息
 
-```bash
+```js
 docker-machine config
 ```
 
 条款信息
 
-```bash
+```js
 docker-machine provision
 ```
 
 进入虚拟机的 docker
 
-```bash
+```js
 docker-machine ssh
 ```
 
 查看虚拟机 docker 的状态
 
-```bash
+```js
 docker-machine status
 ```
 
 升级机器
 
-```bash
+```js
 docker-machine upgrade
 ```
 
 IP `http://192.168.99.100`
 
-```bash
+```js
 docker-machine ip
 ```
 
 URL tcp://192.168.99.100:2376
 
-```bash
+```js
 docker-machine url
 ```
 
 查看设置信息
 
-```bash
+```js
 docker-machine env -u
 ```
 
 设置 DOCKER 的变量
 
-```bash
+```js
 eval $(docker-machine env -u)
 ```
 
 查看 DOCKER 变量
 
-```bash
+```js
 env | grep DOCKER
 ```
 
 设置开机启动名字为 default 的 docker 虚拟机
 
-```bash
+```js
 eval $(docker-machine env default)
 ```

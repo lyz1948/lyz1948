@@ -47,25 +47,19 @@ module.exports = {
       ],
       '/': [
         '/code/ts/',
-        {
-          title: 'JavaScript',
-          children: [
-            '/code/js/string',
-            '/code/js/types',
-            '/code/js/variable',
-            '/code/js/scope',
-            '/code/js/regexp',
-            '/code/js/object',
-            '/code/js/array',
-            '/code/js/prototype',
-            '/code/js/function',
-            '/code/js/math',
-            '/code/js/this',
-            '/code/js/es6',
-            '/code/js/class',
-            '/code/js/'
-          ]
-        },
+        '/code/js/',
+        '/code/js/scope',
+        '/code/js/prototype',
+        '/code/js/function',
+        '/code/js/math',
+        '/code/js/es6',
+        '/code/designPatterns/',
+        '/code/libs/',
+        '/code/koa/',
+        '/code/ramda/',
+        '/code/libs/30sec',
+        '/code/libs/ydnjs',
+        'code/libs/goodjs',
         {
           title: 'Algorithm',
           children: [
@@ -90,21 +84,13 @@ module.exports = {
           title: 'Docker',
           children: [
             '/code/docker/',
-            '/code/docker/docker',
             '/code/docker/docker-registry',
             '/code/docker/docker-network',
             '/code/docker/docker-machine',
             '/code/docker/docker-compose',
             '/code/docker/dockerfile'
           ]
-        },
-        '/code/designPatterns/',
-        '/code/libs/',
-        '/code/koa/',
-        '/code/ramda/',
-        '/code/libs/30sec',
-        '/code/libs/ydnjs',
-        'code/libs/goodjs'
+        }
       ]
     }
   }

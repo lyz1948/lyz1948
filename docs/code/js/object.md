@@ -176,6 +176,7 @@ Object.defineProperty(myobj, 'a', {
 myobj.a = 31
 myobj.a  // 21
 ```
+
 将对象的可写属性设置为false时，将不能修改对象的属性值
 
 ``` js

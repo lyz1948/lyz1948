@@ -24,10 +24,10 @@ function ArrayList() {
 this.bubbleSort = function() {
   let len = array.length
 
-  for(let i = 0; i < len; i++) {
-    for(let j = 0; j < len-1; j++) {
-      if(array[j] > array[j+1]) {
-        swap(j, j+1)
+  for (let i = 0; i < len; i++) {
+    for (let j = 0; j < len - 1; j++) {
+      if (array[j] > array[j + 1]) {
+        swap(j, j + 1)
       }
     }
   }
@@ -38,7 +38,27 @@ const swap = function(index1, index2) {
   array[index1] = array[index2]
   array[index2] = aux
 }
+```
 
+```js
+var arr = [7, 2, 5, 3, 4, 8, 1]
+var maopaoSort = function(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    for (var j = 0; j < arr.length - i; j++) {
+      transposition(j, j + 1)
+    }
+  }
+  function transposition(n1, n2) {
+    var temp = ''
+    if (arr[n1] > arr[n2]) {
+      temp = arr[n1]
+      arr[n1] = arr[n2]
+      arr[n2] = temp
+    }
+  }
+  return arr
+}
+maopaoSort(arr)
 ```
 
 ### 测试冒泡算法
@@ -46,7 +66,7 @@ const swap = function(index1, index2) {
 ```js
 const createArrayNode = function(num) {
   let arr = new ArrayList()
-  for(let i = num; i >= 0; i--) {
+  for (let i = num; i >= 0; i--) {
     arr.insert(i)
   }
   return arr
@@ -56,7 +76,6 @@ let arr = createArrayNode(8)
 console.log(arr.toString())
 arr.bubbleSort()
 console.log(arr.toString())
-
 ```
 
 ### 改进版冒泡算法
@@ -65,10 +84,10 @@ console.log(arr.toString())
 this.modifiedBubbleSort = function() {
   let len = array.length
 
-  for(let i = 0; i < len; i++) {
-    for(let j = 0; j < len-1-i; j++) {
-      if(array[j] > array[j+1]) {
-        swap(j, j+1)
+  for (let i = 0; i < len; i++) {
+    for (let j = 0; j < len - 1 - i; j++) {
+      if (array[j] > array[j + 1]) {
+        swap(j, j + 1)
       }
     }
   }
@@ -80,15 +99,15 @@ this.modifiedBubbleSort = function() {
 ```js
 this.selectionSort = function() {
   let len = array.length,
-      indexMin
+    indexMin
 
-  for(let i = 0; i < len-1; i++) {
+  for (let i = 0; i < len - 1; i++) {
     indexMin = i
-    for(let j = i; j < len; j++) {
-      if(array[indexMin] > array[j]) {
+    for (let j = i; j < len; j++) {
+      if (array[indexMin] > array[j]) {
         indexMin = j
       }
-      if(i != indexMin) {
+      if (i != indexMin) {
         swap(i, indexMin)
       }
     }
@@ -96,22 +115,42 @@ this.selectionSort = function() {
 }
 ```
 
-选择排序同样也是一个  度为O(n2)的算法。和冒泡排序一样，它包含有嵌套的两个循环， 这导致了二次方的复杂度
+```js
+var arr = [7, 2, 5, 3, 4, 8, 1]
+var chooseSort = function(arr) {
+  var min = arr[0]
+  var idx = 0
+  if (arr.length === 1) {
+    return arr
+  }
+  for (var i = 0; i < arr.length; i++) {
+    if (min > arr[i]) {
+      min = arr[i]
+      idx = i
+    }
+  }
+  var ret = arr.splice(idx, 1)
+  return ret.concat(chooseSort(arr))
+}
+chooseSort(arr)
+```
+
+选择排序同样也是一个难度为 O(n2)的算法。和冒泡排序一样，它包含有嵌套的两个循环， 这导致了二次方的复杂度
 
 ### 插入排序
 
-插入排序每次一个数组项，以此方法构建最后的排序数组。假定第一项已经排序了，接着，它和第二项进行比较，第二项是应该待在原位还是插到第一项之前？这样，头两项就已正  排序，接着和第三项比较(它是该插入到第一、第二还是第三的位置呢？)，以此类
+插入排序每次一个数组项，以此方法构建最后的排序数组。假定第一项已经排序了，接着，它和第二项进行比较，第二项是应该待在原位还是插到第一项之前？这样，头两项就已正序排序，接着和第三项比较(它是该插入到第一、第二还是第三的位置呢？)，以此类
 
 ```js
 this.insertionSort = function() {
   let len = array.length,
-      j,
-      temp
-  for(let i = 1; i < len; i++) {
+    j,
+    temp
+  for (let i = 1; i < len; i++) {
     j = i
     temp = array[i]
-    while(j > 0 && array[j-1] > temp) {
-      array[j] = array[j-1]
+    while (j > 0 && array[j - 1] > temp) {
+      array[j] = array[j - 1]
       j--
     }
     array[j] = temp
@@ -131,19 +170,19 @@ const merge = function(left, right) {
   let il = 0
   let ir = 0
 
-  while(il < left.length && ir < right.length) {
-    if(left[il] < right[ir]) {
+  while (il < left.length && ir < right.length) {
+    if (left[il] < right[ir]) {
       result.push(left(il++))
     } else {
       result.push(right[ir++])
     }
   }
 
-  while(il < left.length) {
+  while (il < left.length) {
     result.push(left[il++])
   }
 
-  while(ir < right.length) {
+  while (ir < right.length) {
     result.push(right[ir++])
   }
 
@@ -152,7 +191,7 @@ const merge = function(left, right) {
 
 const mergeSortRec = function(array) {
   const len = array.length
-  if(length === 1) {
+  if (length === 1) {
     return array
   }
   let mid = Math.floor(len / 2)
@@ -181,14 +220,14 @@ const partition = function(array, left, right) {
   let i = left
   let j = right
 
-  while(i <= j) {
-    while(array[i] < pivot) {
+  while (i <= j) {
+    while (array[i] < pivot) {
       i++
     }
-    while(array[j] > pivot) {
+    while (array[j] > pivot) {
       j--
     }
-    if(i <= j) {
+    if (i <= j) {
       swapQuickSort(array, i, j)
       i++
       j--
@@ -200,14 +239,14 @@ const partition = function(array, left, right) {
 const quick = function(array, left, right) {
   let index
 
-  if(array.length > 1) {
+  if (array.length > 1) {
     index = partition(array, left, right)
 
-    if(left < index - 1) {
-      quick(array, left, index -1 )
+    if (left < index - 1) {
+      quick(array, left, index - 1)
     }
 
-    if(index < right) {
+    if (index < right) {
       quick(array, index, right)
     }
   }
@@ -218,8 +257,8 @@ const quick = function(array, left, right) {
 
 ```js
 this.sequentialSearch = function(item) {
-  for(let i = 0; i < array.length; i++) {
-    if(item === array[i]) {
+  for (let i = 0; i < array.length; i++) {
+    if (item === array[i]) {
       return i
     }
   }
@@ -238,12 +277,12 @@ this.binarySearch = function(item) {
   let mid
   let element
 
-  while(low <= high) {
+  while (low <= high) {
     mid = Math.floor((low + high) / 2)
     element = array[mid]
-    if(element < item) {
+    if (element < item) {
       low = mid + 1
-    } else if(element > item) {
+    } else if (element > item) {
       high = mid - 1
     } else {
       return mid

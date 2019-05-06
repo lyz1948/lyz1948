@@ -45,7 +45,9 @@ docker exec test01 bash
 
 ```js
 cat /etc/hosts
-查看IP对应```
+查看IP对应
+```
+
 容器的信息
 
 ```js
