@@ -1,5 +1,17 @@
 # 坑
 
+CentOS 安装docker-machine时，报错
+
+```code
+curl: (35) Peer reports incompatible or unsupported protocol version.
+```
+
+解决方式：更新`nss curl libcurl`等工具
+
+```js
+sudo yum update -y nss curl libcurl
+```
+
 homebrew 下载慢如何解决？
 其他方式下载，再移入`brew --cache` 文件下
 
