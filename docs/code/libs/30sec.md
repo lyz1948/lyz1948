@@ -72,10 +72,10 @@ console.log(res) // [1, 5]
 ```js
 const overArgs = (fn, transforms) => (...args) => fn(...args.map((val, i) => transforms[i](val)))
 
-const square = n => n * n 
+const square = n => n * n
 const double = n => n * 2
 const fn = overArgs((x, y) => [x, y], [square, double])
-console.log(fn(3, 9))
+console.log(fn(3, 9)) // [9, 18]
 ```
 
 **pipeAsyncFunctions**
@@ -92,7 +92,7 @@ const sum = pipeAsyncFunctions(
 )
 
 (async () => {
-  console.log(await sum(5))
+  console.log(await sum(5)) // 15
 })
 ```
 
@@ -129,6 +129,8 @@ var pipeFunctions = function() {
   })
 }
 
+// or
+
 var pipeFunctions = function pipeFunctions() {
   for(var _len = arguments.length, fns = Array(_len), _key = 0; _key < _len; _key++) {
     fns[_key] = arguments[_key]
@@ -151,7 +153,6 @@ const promisify = func => (...args) => new Promise((resolve, reject) => func(...
 
 // 普通函数写法
 var promisify = function(func) {
-  
   return function() {
     for(var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key]
@@ -176,7 +177,7 @@ var rearged = rearg(function(a, b, c) {
   return [a, b, c]
 }, [2, 0, 1])
 
-rearged('b', 'c', 'a')
+rearged('b', 'c', 'a') // ["a", "b", "c"]
 ```
 
 **spreadOver**
@@ -227,6 +228,7 @@ all([1, 2, 3])  // true
 
 **allEqual**
 数组内所有值的类型相同，相等
+
 ```js
 const allEqual = arr => arr.every(val => val === arr[0])
 
@@ -235,6 +237,7 @@ allEqual([1, 1, 1, 1, 1]) // true
 ```
 
 **any**
+数组内部分元素符合条件
 
 ```js
 const any = (arr, fn = Boolean) => arr.some(fn)
@@ -243,7 +246,8 @@ any([0, 1, 3, 4], x => x >=3) // true
 any([1, 2, 3, 4, 0]) // true
 ```
 
-**arryaToCSV** 
+**arryaToCSV**
+格式化指定格式数据
 
 ```js
 const arrayToCSV = (arr, delimiter = ',') =>
@@ -254,27 +258,26 @@ arrayToCSV([['a', 'b'], ['c', 'd']], ';'); // '"a";"b"\n"c";"d"'
 ```
 
 **bifurcate**
-
 根据filter值的真假来判断传递的参数数组内容插入到那个数组
 
 ```js
 const bifurcate = (arr, filter) => arr.reduce((acc, val, i) => (acc[filter[i] ? 0 : 1].push(val), acc), [[], []])
 
-bifurcate(['beep', 'boop', 'foo', 'bar'], [true, true, false, true]); // [ ['beep', 'boop', 'bar'], ['foo'] ]
+bifurcate(['beep', 'boop', 'foo', 'bar'], [true, true, false, true]) // [ ['beep', 'boop', 'bar'], ['foo'] ]
 ```
 
 **bifurcateBy**
-
-根据回调函数返回的值来讲第一个参数数组内容插入到那个数组
+根据回调函数返回的值来将第一个参数数组内容插入到那个数组
 
 ```js
 const bifurcateBy = (arr, fn) => arr.reduce((arr, val, i) => (acc[fn(val, i) ? 0 : 1].push(val), acc), [[], []])
 
-bifurcateBy(['beep', 'boop', 'foo', 'bar'], x => x[0] === 'b')
+bifurcateBy(['beep', 'boop', 'foo', 'bar'], x => x[0] === 'b') // [ ['beep', 'boop', 'bar'], ['foo'] ]
 ```
 
 **chunk**
 切割数组为二维数组，第二个参照是数组内元素的长度
+
 ```js
 const chunk = (arr, size) => Array.from({length: Math.ceil(arr.length / size)}, (v, i) => arr.slice(i * size, i * size + size))
 
@@ -283,11 +286,12 @@ chunk([1, 2, 3, 4, 5], 2) // [[1,2] [3, 4] [5]]
 
 **compact**
 过滤数组非假值的值
+
 ```js
 const compact = arr => arr.filter(Boolean)
 
 compact([0, 1, false, 2, '', 3, 'a', 'e' * 23, NaN, 's', 34])
-// // [ 1, 2, 3, 'a', 's', 34 ]
+// [ 1, 2, 3, 'a', 's', 34 ]
 ```
 
 **conutBy**
@@ -299,18 +303,19 @@ const countBy = (arr, fn) => arr.map(typeof fn === 'function' ? fn : val => val[
 }, {})
 
 conutBy([6.1, 4.2, 6.3], Math.floor) // {4: 1, 6: 2}
-
 ```
 
 **conutOccurrences**
+获取数组内某个值出现的次数
 
-  ```js
-  const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
+```js
+const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0)
 
-  conutOccurrence([1, 1, 2, 1, 2, 3], 1) // 3
-  ```
+conutOccurrence([1, 1, 2, 1, 2, 3], 1) // 3
+```
 
 **deepFlatten**
+扁平化多个数组为一个数组
 
 ```js
 const deepFlatten = arr = > [].concat(...arr.map(v => (Array.isArray(v) ? deepFlatten(v) : v)))
@@ -319,18 +324,20 @@ deepFlatten([1, [2], [[3], 4], 5]) // [1, 2, 3, 4, 5]
 ```
 
 **difference**
-返回第一个数组中不包含在第二个数组中的元素
+返回第二个数组中没有出现的值
+
 ```js
 const difference = (a, b) => {
   const s = new Set(b)
 
-  return a.fliter(x => !s.has(x))
+  return a.filter(x => !s.has(x))
 }
 
 difference([1, 2, 3], [1, 2, 5])
 ```
 
 **differenceBy**
+根据指定函数过滤条件，返回不包含在b数组中的元素
 
 ```js
 const differenceBy = (a, b, fn) => {
@@ -343,15 +350,16 @@ differenceBy([{x: 2}, {x: 1}], [{x: 1}], v => v.x) // [{x: 2}]
 ```
 
 **differenceWith**
+筛选出函数处理不符合的数组1的元素
 
 ```js
-筛选出函数处理不符合的数组1的元素
 const differenceWidth = (arr, val, comp) => arr.filter(a => val.findIndex(b => comp(a, b)) === -1)
 
 differenceWidth([1, 1.2, 1.5, 3, 0], [1.9, 3, 0], (a, b) => Math.round(a) === Math.round(b)) // [1, 1.2]
 ```
 
 **drop**
+根据指定下标来切割数组，返回切割后的数组
 
 ```js
 const drop = (arr, n = 1) => arr.slice(n)
@@ -362,7 +370,8 @@ drop([1, 2, 3], 4) // []
 ```
 
 **dropRight**
-从数组的右侧截掉元素
+根据指定下标，来从右侧开始截掉数组元素
+
 ```js
  const dropRight = (arr, n = 1) => arr.slice(0, -n)
 
@@ -375,26 +384,29 @@ drop([1, 2, 3], 4) // []
 
 ```js
 const dropRightWhile = (arr, func) => {
-  while(arr.length > 0 && !func(arr[arr.length - 1])) arr = arr.slice(0, -1)
-  return arr 
+  let rightIndex = arr.length
+  while (rightIndex-- && !func(arr[rightIndex]))
+  return arr.slice(0, rightIndex + 1)
 }
 
-  dropRightWhile([1, 2, 3, 4], n => n < 3)
-  ```
+dropRightWhile([1, 2, 3, 4], n => n < 3)
+```
 
 **dropWhile**
-  
+根据条件来切割数组
+
 ```js
 const dropWhile = (arr, func) => {
   while(arr.length > 0 && !func(arr[0])) arr = arr.slice(1)
-  return arr 
-} 
+  return arr
+}
 
 dropWhile([1, 2, 3, 4], n => n >= 3) // [3, 4]
 ```
 
 **everyNth**
 取数组中下标为nth以及nth倍数的元素
+
 ```js
 const everyNth = (arr, nth) => arr.filter((e, i) => i % nth === nth - 1)
 
@@ -402,7 +414,8 @@ everyNth([1, 2, 3, 4, 5, 6], 2) // [2, 4, 6]
 ```
 
 **filterNonUnique**
-过滤数组中重复的元素
+过滤数组中重复的元素，只保留不重复的
+
 ```js
 const filterNonUnique = arr => arr.filter(i => arr.indexOf(i) === arr.lastIndexOf(i))
 
@@ -410,6 +423,7 @@ filterNonUnique([1, 2, 2, 3, 4, 4, 5]); // [1, 3, 5]
 ```
 
 **filterNonUniqueBy**
+根据指定函数筛选过滤重复的元素
 
 ```js
 const filterNonUniqueBy = (arr, fn) => {
@@ -424,7 +438,7 @@ filterNonUniqueBy([
   { id: 0, value: 'e' }
 ],
 (a, b) => a.id == b.id
-)
+) // [ { id: 2, value: 'c' } ]
 ```
 
 **findLast**
@@ -1432,7 +1446,7 @@ const currentURL = () => window.location.href
 **detectDeviceType**
 
 ```js
-const detectDeviceType => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+const detectDeviceType = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     ? 'Mobile'
     : 'Desktop'
 ```
@@ -1442,8 +1456,8 @@ const detectDeviceType => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Op
 ```js
 const elementContains = (parent, child) => parent !== child && parent.contains(child)
 
-elementContains(document.querySelector('head'), document.querySelector('title')); // true
-elementContains(document.querySelector('body'), document.querySelector('body')); // false
+elementContains(document.querySelector('head'), document.querySelector('title')) // true
+elementContains(document.querySelector('body'), document.querySelector('body')) // false
 ```
 
 **elementIsVisibleInViewport**

@@ -1,19 +1,24 @@
 # Tools
 
-## 获取元素位置
+## Map 方法
 
 ```js
-function getPos(obj) {
-  var pos = {
-    left: 0,
-    top: 0
+const myMap = function(fn, ctx) {
+  const arr = Array.prototype.slice.call(this)
+  const newArr = []
+  for (let i = 0; i < arr.length; i++) {
+    if (!arr.hasOwnProperty(i)) continue
+    newArr.push(fn.apply(ctx, arr[i], i, this))
   }
-  while (obj) {
-    pos.left += obj.offsetLeft || 0
-    pos.top += obj.offsetTop || 0
-    obj = obj.offsetParent
-  }
-  return pos
+  return newArr
+}
+
+// reduce函数实现
+const myMap = function(fn, ctx) {
+  const arr = Array.prototype.slice.call(this)
+  return arr.reduce((acc, cur, index) => {
+    return [...acc, fn.apply(ctx, cur, index, this)]
+  }, [])
 }
 ```
 
@@ -728,6 +733,9 @@ var isType = function(type) {
   }
 }
 
+const isType = type => obj =>
+  Object.prototype.toString.call(obj) === `[object ${type}]`
+
 var isString = isType('String')
 var isArray = isType('Array')
 var isNumber = isType('Number')
@@ -888,18 +896,41 @@ function userBrowser() {
 ## 函数节流
 
 ```js
-var delay = (function() {
-  var _delay,
-    time = 250
-
+const throttle = (fn, wait) => {
+  let inThrottle
+  let lastFn
+  let lastTime
   return function() {
-    //函数节流
-    clearTimeout(_delay)
-    _delay = setTimeout(() => {
-      // do something here
-    }, time)
+    const context = this
+    const args = arguments
+
+    if (!inThrottle) {
+      fn.apply(context, args)
+      inThrottle = true
+      lastTime = Date.now()
+    } else {
+      clearTimeout(lastFn)
+      lastFn = setTimeout(() => {
+        if (wait > Date.now() - lastTime) {
+          fn.apply(context, args)
+          lastTime = Date.now()
+        }
+      }, Math.max(wait - (Date.now() - lastTime) || 0))
+    }
   }
-})()
+}
+```
+
+## 防抖函数
+
+```js
+const debounce = (fn, ms = 0) => {
+  let timeoutId
+  return function(...args) {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => fn.apply(this, args), ms)
+  }
+}
 ```
 
 ## join 方法
@@ -951,9 +982,9 @@ var reverseStr = function(str) {
 ## 随机颜色
 
 ```js
-var randomColor = (function(val) {
+var randomColor = (function() {
   function randomVal(val) {
-    return Math.floor(Math.random() * (255 + 1))
+    return Math.floor(Math.random() * val + 1)
   }
 
   return function() {
@@ -977,6 +1008,8 @@ function randomColor() {
 ```
 
 ## 浅拷贝
+
+对象浅拷贝
 
 ```js
 function copy(sourceObj, targetObj) {
@@ -1031,6 +1064,8 @@ function vowels(str) {
   }
 }
 vowels('Hello World') // ["e", "o", "o"]
+
+const vowels = str => str && str.match(/[aeiou]/g)
 ```
 
 ```js
@@ -1089,6 +1124,12 @@ var createProxyFactory = function(fn) {
     }
     return (cache[args] = fn.apply(this, arguments))
   }
+}
+
+var createProxyFactory = fn => {
+  const cache = {}
+  const args = Array.prototype.join.call(arguments, '')
+  return cache[args] ? cache[args] : (cache[args] = fn.apply(this, arguments))
 }
 
 var proxyMult = createProxyFactory(mult)
@@ -1154,21 +1195,20 @@ function factorial(n) {
 
 ```js
 function indexOf(arr, item){
+  if(arr.indexOf){
+    return arr.indexOf(item)
+  } else {
+    var s = 0,
+      len = arr.length,
+      index != null;
 
-    if(arr.indexOf){
-        return arr.indexOf(item);
-    }else{
-        var s = 0,
-            len = arr.length,
-            index != null;
-
-        for(; s < len; s++){
-            if(arr[s] == item){
-                index = s;
-            }
+      for(; s < len; s++){
+        if(arr[s] == item) {
+          index = s;
         }
     }
-    return (index != null)? index : -1;
+  }
+  return (index != null)? index : -1;
 }
 ```
 
@@ -1264,7 +1304,7 @@ function ajax(url, opt) {
 
 ```js
 function setCookie(name, value, iDay) {
-  if (iDay !== false) {
+  if (iDay && typeof Number(iDay) == 'number') {
     var oDate = new Date()
     oDate.setDate(oDate.getDate() + iDay)
     document.cookie = name + '=' + value + ';expires=' + oDate + ';path=/'
@@ -1274,7 +1314,7 @@ function setCookie(name, value, iDay) {
 }
 
 function getCookie(name) {
-  var arr = document.cookie.split('; ')
+  var arr = document.cookie.split(';')
   var i = 0
 
   for (i = 0; i < arr.length; i++) {
@@ -1349,6 +1389,7 @@ var autoCenter = function(el) {
   var elH = el.offsetHeight
 
   el.style.left = (vW - elW) / 2 + 'px'
+  el.style.top = (vH - elH) / 2 + 'px'
 }
 ```
 
@@ -1488,7 +1529,7 @@ document.onkeydown = function(ev) {
 
 ```js
 function getMin(arr) {
-  var min = 9999,
+  var min = -Infinity,
     len = arr.length,
     idx = -1
 
@@ -1506,7 +1547,7 @@ function getMin(arr) {
 
 ```js
 function getMinHeight(obj) {
-  var iH = 10000
+  var iH = Infinity
   var idx = 0
 
   for (var i = 0; i < obj.length; i++) {
@@ -1540,14 +1581,14 @@ function indexOf(arr, item) {
   } else {
     var s = 0,
     len = arr.length,
-    index != null
-    for ( s < len s++) {
+    index = -1
+    for (; s < len; s++) {
       if (arr[s] == item) {
         index = s
       }
     }
+    return index
   }
-  return (index != null) ? index : -1
 }
 ```
 

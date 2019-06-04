@@ -90,7 +90,7 @@ function warnUser(): void {
 声明一个 void 类型的变量没有什么大用，因为你只能为它赋予 undefined 和 null
 
 ```js
-let unueable: void = undefined
+let uneable: void = undefined
 ```
 
 ### Null 和 Undefined
@@ -185,7 +185,7 @@ function fn(a: string, b?: string, c: string = 'lyz') {
 
 fn('xx', 'yy', 'zz')
 fn('xxx', 'yyy')
-fn('xxxx)
+fn('xxxx')
 ```
 
 spread 操作符
@@ -225,7 +225,7 @@ it.next() // 1
 it.next() // 2
 
 function* getStockPrice(stock) {
-  while (trur) {
+  while (true) {
     yield Math.random() * 100
   }
 }
