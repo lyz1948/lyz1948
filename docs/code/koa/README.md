@@ -132,14 +132,16 @@ app.listen(port, () => {
 })
 ```
 
-## `koa-route`路由
+## `koa-router`路由
 
 ```js
  const Koa = require('koa')
- const route = require('koa-route')
+ const Router = require('koa-router')
  const app = new Koa()
 const host = '127.0.0.1'
 const port = 3752
+
+const router = new Router()
 
 const main = ctx => {
   ctx.response.body = '<h1>Hello Koa!</h1>'
@@ -150,10 +152,13 @@ const contact = ctx => {
   ctx.response.body = '<p>联系我们</p>'
 }
 
-app.use(route.get('/', main))
-app.use(route.get('/contact', contact))
+router.get('/', main)
+router.get('/contact', contact)
 
-app.use(main)
+app
+  .use(router.routes())
+  .use(router.allowedMethods())
+
 app.listen(port, () => {
   console.log(`service is running at http://${host}:${port}`)
 })
@@ -324,10 +329,12 @@ app.listen(port, () => {
 
 ```js
 const Koa = require('koa')
-const route = require('koa-route')
+const Router = require('koa-router')
 const app = new Koa()
 const host = '127.0.0.1'
 const port = 3752
+
+const router = new Router()
 
 const about = ctx => {
   ctx.response.redirect('/')
@@ -342,7 +349,9 @@ app
   .use(route.get('/', main))
   .use(route.get('/about', about))
 
-app.use(main)
+app
+  .use(router.routes())
+  .use(router.allowedMethods())
 
 app.listen(port, () => {
   console.log(`service is running at http://${host}:${port}`)
@@ -528,6 +537,10 @@ app.listen(port, () => {
 })
 ```
 
+```js
+curl -X POST --data "name=Jack" 127.0.0.1:3752
+```
+
 ### 上传文件
 
 ```js
@@ -564,32 +577,6 @@ app.listen(port, () => {
 })
 ```
 
-``` js
-const Koa = require('koa')
-const app = new Koa()
-
-const asyncIO = function() {
-  return new Promise(function(resolve) {
-    setTimeout(function() {
-      resolve()
-      }, 500)
-    })
-}
-
-const midware = function() {
-  return function *(next) {
-    this.body = 'mark '
-    yield next
-    this.body += 'done'
-  }
-}
-
-app.use(midware())
-app.use(function *(next) {
-  yield asyncIO()
-  this.body += 'save '
-  yield next
-})
-
-app.listen(3000)
+```js
+curl --form upload=@/path/to/file http://127.0.0.1:3752
 ```
