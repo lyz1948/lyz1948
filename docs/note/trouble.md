@@ -1,6 +1,25 @@
 # 坑
 
-CentOS 安装docker-machine时，报错
+`Vue`项目使用 `Element UI Icon`图标不显示
+解决方式：在`build`目录下的`utils.js`里添加下面的代码
+
+```js
+publicPath: '../../'
+```
+
+加入的位置在
+
+```js
+if (options.extract) {
+  return ExtractTextPlugin.extract({
+    use: loaders,
+    fallback: 'vue-style-loader',
+    publicPath: '../../', // 解决element 图标不出现问题
+  })
+}
+```
+
+CentOS 安装 docker-machine 时，报错
 
 ```code
 curl: (35) Peer reports incompatible or unsupported protocol version.
@@ -80,8 +99,8 @@ npm i puppeteer
 {
   module.export = {
     dev: {
-      host: '0.0.0.0'
-    }
+      host: '0.0.0.0',
+    },
   }
 }
 ```
@@ -92,7 +111,7 @@ npm i puppeteer
 html2canvas(document.getElementById('cantainer'), { useCORS: true }).then(
   canvas => {
     document.body.appendChild(canvas)
-  }
+  },
 )
 ```
 
@@ -160,8 +179,8 @@ plugins: [
   new webpack.optimize.CommonsChunkPlugin('common.js'),
   new webpack.ProvidePlugin({
     jQuery: 'jquery',
-    $: 'jquery'
-  })
+    $: 'jquery',
+  }),
 ]
 ```
 
