@@ -37,7 +37,7 @@ module.exports = {
         '/note/nvm',
         '/note/pm2',
         '/note/ssh',
-        '/note/rnapp',
+        '/note/tslint',
       ],
       '/getit/': [
         '/getit/',
