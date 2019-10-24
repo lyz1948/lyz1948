@@ -102,7 +102,188 @@ for (i = 0; i < str.length; i++) {
 
 ## 跨域
 
-### 如何解决跨域？
+**同源策略**
+
+- Cookie、LocalStorage、indexDB
+- DOM
+- AJAX
+
+3 个标签运行加载跨域请求
+
+- <img>
+- <link>
+- <script>
+
+常见跨域场景：
+
+1. 同域名 | yes
+2. 同域名不同文件夹 | yes
+3. 同域名，不同端口 | no
+4. 同域名，不同协议 | no
+5. 域名和域名对应 ip | no
+6. 主域相同、子域名不同 | no
+7. 同域名，不同二级域名 | no
+8. 不同域名 | no
+
+1.主域相同，子域不同，可以设置在两个页面都设置 document.domain = ‘xxx.com’然后,两个文档就可以进行交互。 2.主域和子域都不同，则可以使用 CDM(cross document messaging)进行跨域消息的传递。
+发送消息: 使用 postmessage 方法
+接受消息: 监听 message 事件
+
+### 如何解决跨域
+
+1. jsonp
+   利用 script 标签来请求数据，不过 jsonp 请求需要对方服务器支持
+   jsonp 和 ajax 相同，都是客户端发起的请求，不过 ajax 属于同源策略，jsonp 属于非同源策略
+   jsonp 简单，兼容性好，不过只允许 get 请求，并且有可能会遭到 XSS 攻击
+
+```js
+function jsonp({ url, params, callback }) {
+  return new Promise((resolve, reject) => {
+    let script = document.createElement('script')
+    window[callback] = function(data) {
+      resolve(data)
+      document.body.removeChild(script)
+    }
+    // 统一处理参数
+    params = { ...params, callback }
+    const arr = []
+    for (let key in params) {
+      arr.push(`${key}=${params[key]}`)
+    }
+    script.src = `${url}?${arr.join('&')}`
+    document.body.appendChild(script)
+  })
+}
+
+jsonp({
+  url: 'http://localhost:9999/test',
+  params: { type: 'js' },
+  callback: 'give',
+}).then(res => {
+  console.log(res)
+})
+```
+
+```js
+const Koa = require('koa')
+const app = new Koa()
+
+app.get('/test', function(req, res) {
+  const { test, callback } = req.query
+  res.end(`${callback}('你的jsonp请求')`)
+})
+```
+
+2. cors
+
+CORS 需要浏览器和后端同时支持，IE8/9 需要通过 XDomainRequest 实现
+服务端设置 Access-Control-Allow-Origin 就可以开启 CORS
+
+**CORS 分为简单请求和复杂请求**
+
+- 简单请求
+  GET/HEAD/POST 请求方式
+  Content-Type 的值：text/plain | multipart/form-data | application/x-www-form-urlencoded
+
+- 复杂请求
+  复杂请求的 CORS 请求，会在正式通信之前，增加一次 HTTP 查询请求，称为"预检"请求,该请求是 option 方法的，通过该请求来知道服务端是否允许跨域请求。
+
+```js
+// index.html
+let xhr = new XMLHttpRequest()
+document.cookie = 'name=bq' // cookie不能跨域
+xhr.withCredentials = true // 前端设置是否带cookie
+xhr.open('PUT', 'http://localhost:9999/test', true)
+xhr.setRequestHeader('name', 'bq')
+xhr.onreadystatechange = function() {
+  if (xhr.readyState === 4) {
+    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
+      console.log(xhr.response)
+      // 得到响应头，后台需设置Access-Control-Expose-Headers
+      console.log(xhr.getResponseHeader('name'))
+    }
+  }
+}
+xhr.send()
+```
+
+```js
+// server1.js
+const Koa = require('koa')
+const serve = require('koa-static')
+const path = require('path')
+const app = new Koa()
+const port = 8888
+
+app.use(serve(path.join(__dirname)))
+app.listen(port)
+```
+
+```js
+// server2.js
+const Koa = require('koa')
+const serve = require('koa-static')
+const path = require('path')
+
+const app = new Koa()
+const whitList = ['http://localhost:8888'] // 设置白名单
+const port = 9999
+
+app.use(function(req, res, next) {
+  const origin = req.headers.origin
+  if (whitList.includes(origin)) {
+    // 设置哪个源可以访问我
+    res.setHeader('Access-Control-Allow-Origin', origin)
+    // 允许携带哪个头访问我
+    res.setHeader('Access-Control-Allow-Headers', 'name')
+    // 允许哪个方法访问我
+    res.setHeader('Access-Control-Allow-Methods', 'PUT')
+    // 允许携带cookie
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    // 预检的存活时间
+    res.setHeader('Access-Control-Max-Age', 6)
+    // 允许返回的头
+    res.setHeader('Access-Control-Expose-Headers', 'name')
+    if (req.method === 'OPTIONS') {
+      res.end() // OPTIONS请求不做任何处理
+    }
+  }
+  next()
+})
+
+app.put('/test', function(req, res) {
+  console.log(req.headers)
+  res.setHeader('name', 'jw') // 返回一个响应头，后台需设置
+  res.end('show my code')
+})
+
+app.get('/test', function(req, res) {
+  console.log(req.headers)
+  res.end('show my code')
+})
+
+app.use(serve(path.join(__dirname)))
+app.listen(port)
+```
+
+3. postmessage
+
+- 页面和其打开的新窗口的数据传递
+- 多窗口之间消息传递
+- 页面与嵌套的iframe消息传递
+- 上面三个场景的跨域数据传递
+
+4. webSocket
+
+5. node中间件
+
+6. Nginx反向代理
+
+7. window.name + iframe
+
+8. location.hash + iframe
+
+9. document.domain + iframe
 
 ## Node
 
