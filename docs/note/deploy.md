@@ -12,7 +12,7 @@ df -h
 在.zshrc中加入下面代码
 
 ```bash
-alias ssh_ykpine="ssh ubuntu@118.24.18.252"
+alias ssh_ykpine="ssh ubuntu@xxx.xx.xxx.xx"
 ```
 
 ## 服务器添加新用户
