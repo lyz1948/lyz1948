@@ -1,10 +1,10 @@
 # 装饰模式
 
-```bash
+```js
 var plane = {
   file: function() {
     console.log('发射普通子弹')
-  }
+  },
 }
 
 var missileDecorator = function() {
@@ -32,11 +32,13 @@ plane.fire = function() {
 plane.fire()
 ```
 
-### 用AOP装饰函数
-```bash
+### 用 AOP 装饰函数
+
+```js
 Function.prototype.before = function(beforefn) {
-  var _self = this  // 保存原函数的引用
-  return function() { // 返回包含了原函数和新函数的‘代理’函数 也会原封不动地传入原函数，新函数在原函数执行之前，执行原函数并返回函数的执行结果， 并保证this不被劫持
+  var _self = this // 保存原函数的引用
+  return function() {
+    // 返回包含了原函数和新函数的‘代理’函数 也会原封不动地传入原函数，新函数在原函数执行之前，执行原函数并返回函数的执行结果， 并保证this不被劫持
     beforefn.apply(this, arguments)
     return _slef.apply(this, arguments)
   }
@@ -59,8 +61,12 @@ var before = function(fn, beforefn) {
 }
 
 var a = before(
-  function() {console.log(3)},
-  function() {console.log(2)}
+  function() {
+    console.log(3)
+  },
+  function() {
+    console.log(2)
+  },
 )
 
 a = before(a, function() {
@@ -70,9 +76,9 @@ a = before(a, function() {
 a() // 1, 2, 3
 ```
 
-### AOP应用实例
+### AOP 应用实例
 
-```bash
+```js
 Function.prototype.after = function(afterfn) {
   var self = this
   reutrn function() {
@@ -94,9 +100,9 @@ showLogin = showLogin.after(log)
 document.querySelector('#button').onclick = showLogin
 ```
 
-### 用AOP动态改变函数的参数
+### 用 AOP 动态改变函数的参数
 
-```bash
+```js
 Function.prototype.before = function(beforefn) {
   var self = this
   return function() {
@@ -113,7 +119,7 @@ func = func.before(function(param) {
   param.b = b
 })
 
-func({a: a})
+func({ a: a })
 
 var ajax = function(type, url, param) {
   console.log(param)
@@ -126,31 +132,30 @@ var getToken = function() {
 ajax = ajax.before(function(type, url, param) {
   param.Token = getToken()
 })
-
 ```
 
 ### 插件形式表单验证
 
-```bash
+```js
 var validator = function() {
-  if(username.value === '') {
+  if (username.value === '') {
     console.log('用户名不能为空')
     return
   }
 
-  if(password === '') {
+  if (password === '') {
     console.log('密码不能为空')
     return
   }
 }
 
 var formSubmit = function() {
-  if(validator() === false) {
+  if (validator() === false) {
     return
   }
   var param = {
     username: username.value,
-    password: password.value
+    password: password.value,
   }
   ajax('http://xxxx.abc.com/login', param)
 }
@@ -162,11 +167,11 @@ submintBtn.onclick = function() {
 
 ### 优化代码，分离 `validator` 和 `formSubmit`
 
-```bash
+```js
 Function.prototype.before = function(beforefn) {
   var self = this
   return function() {
-    if(beforefn.apply(this, arguments) === false) {
+    if (beforefn.apply(this, arguments) === false) {
       return
     }
     return self.apply(this, arguments)
@@ -174,12 +179,12 @@ Function.prototype.before = function(beforefn) {
 }
 
 var validator = function() {
-  if(username.value === '') {
+  if (username.value === '') {
     console.log('用户名不能为空')
     return
   }
 
-  if(password === '') {
+  if (password === '') {
     console.log('密码不能为空')
     return
   }
@@ -188,7 +193,7 @@ var validator = function() {
 var formSubmit = function() {
   var param = {
     username: username.value,
-    password: password.value
+    password: password.value,
   }
 
   ajax('http://abc.com/login', param)

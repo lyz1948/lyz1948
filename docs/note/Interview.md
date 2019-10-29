@@ -110,9 +110,11 @@ for (i = 0; i < str.length; i++) {
 
 3 个标签运行加载跨域请求
 
+```html
 - <img>
 - <link>
 - <script>
+```
 
 常见跨域场景：
 
@@ -287,6 +289,12 @@ app.listen(port)
 
 ## Node
 
+使用 node index.js 如何能后台方式运行？
+
+```js
+node app.js &
+```
+
 ### Event loop
 
 ## react
@@ -307,7 +315,84 @@ app.listen(port)
 
 ## Javascript
 
+箭头函数与普通函数的区别？
+
+1、函数体内的 this 对象，就是定义时所在的对象，而不是使用时所在的对象。
+
+2、不可以使用 arguments 对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替。
+
+3、不可以使用 yield 命令，因此箭头函数不能用作 Generator 函数。
+
+4、不可以使用 new 命令，因为：
+
+- 没有自己的 this，无法调用 call，apply。
+- 没有 prototype 属性 ，而 new 命令在执行时需要将构造函数的 prototype 赋值给新的对象的 __proto__
+
 ### 节流与防抖
+
+节流 Throttle
+
+```js
+function throttle(fn, wait) {
+  let lasttime
+  return function() {
+    let ctx = this
+    let args = arguments
+    if (Date.now() - lasttime > wait) {
+      fn.apply(ctx, args)
+      lasttime = Date.now()
+    }
+  }
+}
+```
+
+防抖 debounce
+
+```js
+function debounce(fn, wait) {
+  let timer
+
+  return function() {
+    let ctx = this
+    let args = arguments
+    clearTimeout(timer)
+    timer = setTimeout(function() {
+      fn.apply(ctx, args)
+    }, wait)
+  }
+}
+```
+
+Throttle 来优化 Debounce
+
+```js
+function throttle(fn, wait) {
+  let inThrottle, timer, lasttime
+  return function() {
+    let ctx = this
+    let args = arguments
+    if (!inThrottle) {
+      fn.apply(cxt, args)
+      inThrottle = true
+      lasttime = Date.now()
+    } else {
+      clearTimeout(timer)
+      timer = setTimeout(function() {
+        if (Date.now() - lasttime >= wait) {
+          fn.apply(ctx, args)
+          lasttime = Date.now()
+        }
+      }, Math.max(Date.now() - lasttime - wait, 0))
+    }
+  }
+}
+```
+
+ES6 代码转成 ES5 代码的实现思路是什么?
+
+- 将代码字符串解析成抽象语法树，即所谓的 AST
+- 对 AST 进行处理，在这个阶段可以对 ES6 代码进行相应转换，即转成 ES5 代码
+- 根据处理后的 AST 再生成代码字符串
 
 ## canvas
 
@@ -317,17 +402,33 @@ app.listen(port)
 
 ### 长列表性能问题
 
-### Safari 滑动结束才触发 scroll 事件如果解决？
+### Safari 滑动结束才触发 scroll 事件如果解决
 
-### 从详情页返回列表页，有哪些方法可以定位到以前的状态？
+### 从详情页返回列表页，有哪些方法可以定位到以前的状态
 
 ## Http(s)
 
 ### 状态码
 
+- 301 资源永久移除
+- 302 
+- 304
+- 403
+
 ### https 原理
 
-### get 和 post 的区别？post 代替 get 请求数据有什么劣势？
+### CDN
+
+什么是CDN?
+
+CDN （Content Delivery Network，即内容分发网络）指的是一组分布在各个地区的服务器。这些服务器存储着数据的副本，因此服务器可以根据哪些服务器与用户距离最近，来满足数据的请求。 CDN 提供快速服务，较少受高流量影响。
+
+CDN 核心功能是什么?
+
+CDN 的核心点有两个，一个是缓存，一个是回源。
+
+
+### get 和 post 的区别？post 代替 get 请求数据有什么劣势
 
 ## 框架库比较
 
@@ -337,11 +438,22 @@ app.listen(port)
 
 ### webpack
 
-- loader 和 plugin 的区别
+webpack 如何优化构建过程时间与打包的结果体积太大？
 
-- compilie 原理
-
+- 不要让 loader 做太多事情， 使用exclude 排除不需要打包的文件夹 `exclude: /(node_modules|bower_components)/`
+- 开启缓存 `loader: 'babel-loader?cacheDirectory=true'`
+- 不要放过第三方库
+- Happypack——将 loader 由单进程转为多进程
+- 拆分资源
+- 删除冗余代码
 - 按需加载
+- Gzip压缩
+
+loader 和 plugin 的区别?
+
+compilie 原理?
+
+按需加载?
 
 ### babel
 

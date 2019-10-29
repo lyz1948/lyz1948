@@ -1,15 +1,16 @@
 # 策略模式
 
 策略模式计算奖金
-```bash
+
+```js
 var strategies = {
-  'S': function(salary) {
+  S: function(salary) {
     return salary * 4
   },
-  'B': function(salary) {
+  B: function(salary) {
     return salary * 3
   },
-  'A': function(salary) {
+  A: function(salary) {
     return salary * 2
   },
 }
@@ -18,8 +19,10 @@ var calculateBouns = function(level, salary) {
 }
 calculateBouns('S', 10000)
 ```
+
 下面这样的写法，你还看得出是策略模式吗？
-```bash
+
+```js
 var S = function(salary) {
   return salary * 4
 }
@@ -35,30 +38,35 @@ var calculateBouns = function(func, salary) {
 }
 calculateBouns(S, 10000)
 ```
+
 ##### 策略模式表单校验
+
 策略对象
-```bash
+
+```js
 var strategies = {
   isNonEmpty: function(value, errorMsg) {
-    if(value === '') {
+    if (value === '') {
       return errorMsg
     }
   },
   minLength: function(value, length, errorMsg) {
-    if(value.length < length) {
+    if (value.length < length) {
       return errorMsg
     }
   },
   isMobile: function(value, errorMsg) {
     let reg = /^1[3|5|8][0-9]{9}$/
-    if(!reg.test(value)) {
+    if (!reg.test(value)) {
       return errorMsg
     }
-  }
+  },
 }
 ```
+
 Validator 类
-```bash
+
+```js
 var validataFunc = function() {
   // 创建validator对象
   var validator = new Validator()
@@ -87,27 +95,29 @@ Validator.prototype.add = function(dom, rule, errorMsg) {
     var strategy = ary.shift()
     ary.unshift(dom.value)
     ary.push(errorMsg)
-    return strategies[ strategy ].apply(dom, ary)
+    return strategies[strategy].apply(dom, ary)
   })
 }
 
 Validator.prototype.start = function() {
-  for(var i = 0, validatorFunc; validatorFunc = this.cache[i++];) {
+  for (var i = 0, validatorFunc; (validatorFunc = this.cache[i++]); ) {
     var errorMsg = validatorFunc()
     // 如果有错误消息，说明没通过，返回错误信息
-    if(errorMsg) {
+    if (errorMsg) {
       return errorMsg
     }
   }
 }
 ```
+
 校验多个值
-```bash
+
+```js
 Validator.prototype.add = function(dom, rules) {
   var self = this
 
-  for(var i = 0, rule; rule = rules[i++];) {
-    (function(rule) {
+  for (var i = 0, rule; (rule = rules[i++]); ) {
+    ;(function(rule) {
       var strategyAry = rule.strategy.split(':')
       var errorMsg = rule.errorMsg
 
@@ -121,22 +131,22 @@ Validator.prototype.add = function(dom, rules) {
   }
 }
 
-var registerForm = document.getElementById( 'registerForm' )
+var registerForm = document.getElementById('registerForm')
 
 var validataFunc = function() {
   var validator = new Validator()
 
   validator.add(registerForm.userName, [
-    { strategy: 'isNonEmpty', errorMsg: '用户名不能为空'},
-    { strategy: 'minLength:6', errorMsg: '用户名长度不能小于6位'}
+    { strategy: 'isNonEmpty', errorMsg: '用户名不能为空' },
+    { strategy: 'minLength:6', errorMsg: '用户名长度不能小于6位' },
   ])
 
   validator.add(registerForm.password, [
-    { strategy: 'minLength:6', errorMsg: '密码长度不能小于6位'}
+    { strategy: 'minLength:6', errorMsg: '密码长度不能小于6位' },
   ])
 
   validator.add(registerForm.phoneNumber, [
-    { strategy: 'isMobile', errorMsg: '手机号码格式不正确'}
+    { strategy: 'isMobile', errorMsg: '手机号码格式不正确' },
   ])
 
   var errorMsg = validator.start()
@@ -146,7 +156,7 @@ var validataFunc = function() {
 registerForm.onsubmit = function() {
   var errorMsg = validataFunc()
 
-  if(errorMsg) {
+  if (errorMsg) {
     return false
   }
 }

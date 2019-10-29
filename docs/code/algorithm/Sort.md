@@ -16,7 +16,7 @@ function ArrayList() {
 }
 ```
 
-### 冒泡排序
+## 冒泡排序
 
 冒泡排序比较任何两个相邻的项，如果第一个比第二个大，则交换它们。元素项向上移动至正确的顺序，就好像气泡升至表面一样，冒泡排序因此得名
 
@@ -61,7 +61,7 @@ var maopaoSort = function(arr) {
 maopaoSort(arr)
 ```
 
-### 测试冒泡算法
+测试冒泡算法
 
 ```js
 const createArrayNode = function(num) {
@@ -78,7 +78,7 @@ arr.bubbleSort()
 console.log(arr.toString())
 ```
 
-### 改进版冒泡算法
+改进版冒泡算法
 
 ```js
 this.modifiedBubbleSort = function() {
@@ -94,7 +94,7 @@ this.modifiedBubbleSort = function() {
 }
 ```
 
-### 选择排序
+## 选择排序
 
 ```js
 this.selectionSort = function() {
@@ -137,7 +137,7 @@ chooseSort(arr)
 
 选择排序同样也是一个难度为 O(n2)的算法。和冒泡排序一样，它包含有嵌套的两个循环， 这导致了二次方的复杂度
 
-### 插入排序
+## 插入排序
 
 插入排序每次一个数组项，以此方法构建最后的排序数组。假定第一项已经排序了，接着，它和第二项进行比较，第二项是应该待在原位还是插到第一项之前？这样，头两项就已正序排序，接着和第三项比较(它是该插入到第一、第二还是第三的位置呢？)，以此类
 
@@ -158,7 +158,7 @@ this.insertionSort = function() {
 }
 ```
 
-### 归并排序
+## 归并排序
 
 ```js
 this.mergeSort = function() {
@@ -202,7 +202,7 @@ const mergeSortRec = function(array) {
 }
 ```
 
-### 快速排序
+## 快速排序
 
 ```js
 this.quickSort = function() {
@@ -253,20 +253,7 @@ const quick = function(array, left, right) {
 }
 ```
 
-### 顺序搜索
-
-```js
-this.sequentialSearch = function(item) {
-  for (let i = 0; i < array.length; i++) {
-    if (item === array[i]) {
-      return i
-    }
-  }
-  return -1
-}
-```
-
-### 二分搜索
+## 二分搜索
 
 ```js
 this.binarySearch = function(item) {

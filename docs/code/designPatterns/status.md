@@ -1,6 +1,6 @@
 # 状态模式
 
-```bash
+```js
 var OffLightState = function(light) {
   this.light = light
 }
@@ -37,7 +37,7 @@ var Light = function() {
 
 Light.prototype.init = function() {
   var button = document.createElement('button'),
-      self = this
+    self = this
   this.button = document.body.appendChild(button)
   this.button.innerHTML = '开关'
 
@@ -75,7 +75,7 @@ light.init()
 
 ### 状态模式-文件上传
 
-```bash
+```js
 // 上传对象
 window.external.upload = function(state) {
   console.log(state)
@@ -125,7 +125,9 @@ Upload.prototype.init = function() {
   var that = this
   this.dom = document.createElement('div')
   this.dom.innerHTML =
-    '<span>文件名称：'+ this.fileName +'</span>\
+    '<span>文件名称：' +
+    this.fileName +
+    '</span>\
     <button data-action="button1">扫描中</button>\
     <button data-action="button2">删除</button>'
 
@@ -196,7 +198,7 @@ var StateFactory = (function() {
 
     F.prototype = new State()
 
-    for(var i in param) {
+    for (var i in param) {
       F.prototype[i] = param[i]
     }
     return F
@@ -209,7 +211,7 @@ var SignState = StateFactory({
   },
   clickHandler2: function() {
     console.log('文件正在上传中，不能删除')
-  }
+  },
 })
 
 var UploadingState = StateFactory({
@@ -218,7 +220,7 @@ var UploadingState = StateFactory({
   },
   clickHandler2: function() {
     console.log('文件正在上传中，不能删除')
-  }
+  },
 })
 
 var PauseState = StateFactory({
@@ -227,7 +229,7 @@ var PauseState = StateFactory({
   },
   clickHandler2: function() {
     this.uploadObj.del()
-  }
+  },
 })
 
 var DoneState = StateFactory({
@@ -236,7 +238,7 @@ var DoneState = StateFactory({
   },
   clickHandler2: function() {
     this.uploadObj.del()
-  }
+  },
 })
 
 var ErrorState = StateFactory({
@@ -245,13 +247,13 @@ var ErrorState = StateFactory({
   },
   clickHandler2: function() {
     this.uploadObj.del()
-  }
+  },
 })
 ```
 
 ### 模拟上传测试代码
 
-```bash
+```js
 var uploadObj = new Upload('JavaScript设计模式与开发实践')
 
 uploadObj.init()
@@ -271,8 +273,9 @@ setTimeout(function() {
 }, 3000)
 ```
 
-JavaScript状态机 模式灯泡开关状态🌰
-```bash
+JavaScript 状态机 模式灯泡开关状态 🌰
+
+```js
 var Light = function() {
   this.currentState = FSM.off // 初始化状态
   this.button = null
@@ -295,27 +298,27 @@ var FSM = {
       console.log('关灯')
       this.button.innerHTML = '下一次点击开灯'
       this.currentState = FSM.on
-    }
+    },
   },
   on: {
     buttonWasPressed: function() {
       console.log('开灯')
       this.button.innerHTML = '下一次点击关灯'
       this.currentState = FSM.off
-    }
-  }
+    },
+  },
 }
 
 var light = new Light()
 light.init()
 ```
 
-```bash
+```js
 var delegate = function(client, delegation) {
   return {
     buttonWasPressed: function() {
       return delegation.buttonWasPressed.apply(client, arguments)
-    }
+    },
   }
 }
 
@@ -325,15 +328,15 @@ var FSM = {
       console.log('关灯')
       this.button.innerHTML = '下一次按我是开灯'
       this.currentState = this.onState
-    }
+    },
   },
   on: {
     buttonWasPressed: function() {
       console.log('开灯')
       this.button.innerHTML = '下一次按我是关灯'
       this.currentState = this.offState
-    }
-  }
+    },
+  },
 }
 
 var Light = function() {

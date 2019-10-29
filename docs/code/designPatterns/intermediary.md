@@ -1,6 +1,6 @@
 # 中介者模式
 
-```bash
+```js
 // 玩家对象
 function Player(name, teamColor) {
   this.name = name // 角色名字
@@ -53,8 +53,8 @@ var playerDirector = (function() {
     var teamColor = player.teamColor
     var teamPlayers = players[teamColor] || []
 
-    for(var i = teamPlayers.length - 1; i >= 0; i--) {
-      if(teamPlayers[i] === player) {
+    for (var i = teamPlayers.length - 1; i >= 0; i--) {
+      if (teamPlayers[i] === player) {
         teamPlayers.splice(i, 1)
       }
     }
@@ -73,22 +73,22 @@ var playerDirector = (function() {
 
     var all_dead = true
 
-    for(var i = 0, player; player = teamPlayers[i++];) {
-      if(player.state !== 'dead') {
+    for (var i = 0, player; (player = teamPlayers[i++]); ) {
+      if (player.state !== 'dead') {
         all_dead = false
         break
       }
     }
 
-    if(all_dead === true) {
-      for(var i = 0, palyer; player = teamPlayers[i++];) {
+    if (all_dead === true) {
+      for (var i = 0, palyer; (player = teamPlayers[i++]); ) {
         player.lose()
       }
 
-      for(var color in players) {
-        if(color !== teamColor) {
+      for (var color in players) {
+        if (color !== teamColor) {
           var teamPlayers = players[color]
-          for(var i = 0, player; palyer = teamPlayers[i++];) {
+          for (var i = 0, player; (palyer = teamPlayers[i++]); ) {
             player.win()
           }
         }
@@ -106,7 +106,6 @@ var player2 = playerFactory('小丫', 'red')
 var player3 = playerFactory('狗蛋', 'red')
 var player4 = playerFactory('二娃', 'red')
 
-
 var player5 = playerFactory('黑妞', 'green')
 var player6 = playerFactory('小米', 'green')
 var player7 = playerFactory('二狗', 'green')
@@ -116,11 +115,11 @@ player1.die()
 player2.die()
 player3.die()
 player4.die()
-
 ```
 
-### 中介者模式-购买商品🌰
-```bash
+### 中介者模式-购买商品 🌰
+
+```js
 // 手机库存
 var goods = {
   'red|32G': 3,

@@ -1,19 +1,22 @@
 # 单例模式
 
 ### 惰性单例
-```bash
+
+```js
 Singleton.getInstance = (function() {
   var instance = null
   return function(name) {
-    if(!instance) {
+    if (!instance) {
       instance = new Singleton(name)
     }
     return instance
   }
 })()
 ```
+
 ### 通用单例
-```bash
+
+```js
 var getSingle = function(fn) {
   var result
   return function() {

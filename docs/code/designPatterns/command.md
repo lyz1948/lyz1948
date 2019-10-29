@@ -1,7 +1,6 @@
 # 命令模式
 
-
-```bash
+```js
 // 设置命令
 var setCommand = function(button, command) {
   button.onclick = function() {
@@ -13,7 +12,7 @@ var setCommand = function(button, command) {
 var MenuBar = {
   refresh: function() {
     console.log('刷新菜单')
-  }
+  },
 }
 
 // 命令接收者
@@ -29,8 +28,10 @@ var refreshMenuBarCommand = new RefreshMenuBarCommand(MenuBar)
 
 setCommand(button1, refreshMenuBarCommand)
 ```
+
 用闭包实现命令模式
-```bash
+
+```js
 var setCommand = function(button, func) {
   button.onclick = functioin() {
     func()
@@ -55,7 +56,8 @@ setCommand(button, refreshMenuBarCommand)
 ```
 
 ### 撤销命令
-```bash
+
+```js
 var MoveCommand = function(receiver, pos) {
   this.receiver = receiver
   this.pos = pos
@@ -64,7 +66,9 @@ var MoveCommand = function(receiver, pos) {
 
 MoveCommand.prototype.execute = function() {
   this.receiver.start('left', this.pos, 1000, 'strongEaseOut')
-  this.oldPos = this.receiver.dom.getBoundingClientRect()[this.receiver.propertyName]
+  this.oldPos = this.receiver.dom.getBoundingClientRect()[
+    this.receiver.propertyName
+  ]
 }
 
 MoveCommand.prototype.undo = function() {
@@ -89,7 +93,8 @@ cancelBtn.onclick = function() {
 ```
 
 ### 命令模式-撤销和重做
-```bash
+
+```js
 var Ryu = {
   attack: function() {
     console.log('攻击')
@@ -102,7 +107,7 @@ var Ryu = {
   },
   crouch: function() {
     console.log('蹲下')
-  }
+  },
 }
 
 var makeCommand = function(receiver, state) {
@@ -112,19 +117,19 @@ var makeCommand = function(receiver, state) {
 }
 
 var commands = {
-  "119": "jump",  // W
-  "115": "crouch", // S
-  "97": "defense", // A
-  "100": "attack",  // D
+  '119': 'jump', // W
+  '115': 'crouch', // S
+  '97': 'defense', // A
+  '100': 'attack', // D
 }
 
 var commandStack = []
 
 document.onkeypress = function(ev) {
   var keyCode = ev.keyCode,
-      command = makeCommand(Ryu, commands[keyCode])
+    command = makeCommand(Ryu, commands[keyCode])
 
-  if(command) {
+  if (command) {
     command() // 执行命令
     commandStack.push(command) // 将刚才执行的命令保存到堆栈
   }
@@ -132,28 +137,29 @@ document.onkeypress = function(ev) {
 
 document.getElementById('replay').onclick = function() {
   var command
-  while(command = commandStack.shift()) {
+  while ((command = commandStack.shift())) {
     command()
   }
 }
 ```
 
 ### 宏命令
-```bash
+
+```js
 var closeDoorCommand = {
   execute: function() {
     console.log('关门')
-  }
+  },
 }
 var openPcCommand = {
   execute: function() {
     console.log('打开电脑')
-  }
+  },
 }
 var openQQCommand = {
   execute: function() {
     console.log('登录QQ')
-  }
+  },
 }
 
 var MacroCommand = function() {
@@ -163,10 +169,10 @@ var MacroCommand = function() {
       this.commandList.push(command)
     },
     execute: function() {
-      for(var i = 0, command; command = this.commandList[i++];) {
+      for (var i = 0, command; (command = this.commandList[i++]); ) {
         command()
       }
-    }
+    },
   }
 }
 

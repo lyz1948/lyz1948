@@ -1,11 +1,12 @@
 # 代理模式
-```bash
+
+```js
 var Flower = function() {}
 
 var xiaoming = {
   sendFlower: function(target) {
     target.receiveFlower()
-  }
+  },
 }
 
 var B = {
@@ -14,7 +15,7 @@ var B = {
       var flower = new Flower()
       A.receiveFlower(flower)
     })
-  }
+  },
 }
 
 var A = {
@@ -25,13 +26,15 @@ var A = {
     setTimeout(function() {
       fn()
     }, 5 * 1000)
-  }
+  },
 }
 
-xiaoming.sendFlower( B )
+xiaoming.sendFlower(B)
 ```
+
 虚拟代理实现图片预加载
-```bash
+
+```js
 var myImage = (function() {
   var imgNode = document.createElement('img')
   document.body.appendChild(imgNode)
@@ -39,12 +42,12 @@ var myImage = (function() {
   return {
     setSrc: function(src) {
       imgNode.src = src
-    }
+    },
   }
 })()
 
 var proxyImage = (function() {
-  var img = new Image
+  var img = new Image()
   img.onload = function() {
     myImage.setSrc(this.src)
   }
@@ -52,14 +55,16 @@ var proxyImage = (function() {
     setSrc: function(src) {
       myImage.setSrc('./images/loading.gif')
       img.src = src
-    }
+    },
   }
 })()
 
 proxyImage.setSrc('http://odbzr9u4f.bkt.clouddn.com/tiger.jpg')
 ```
-虚拟代理合并HTTP请求
-```bash
+
+虚拟代理合并 HTTP 请求
+
+```js
 var synchronousFile = function(id) {
   console.log('开始同步文件， id为：' + id)
 }
@@ -71,7 +76,7 @@ var proxySynchronousFile = (function() {
   return function(id) {
     cache.push(id)
 
-    if(timer) {
+    if (timer) {
       return
     }
 
@@ -85,32 +90,36 @@ var proxySynchronousFile = (function() {
 })()
 
 var checkbox = document.getElementByTagName('input')
-for(var i = 0, c; c = checkbox[i++];) {
+for (var i = 0, c; (c = checkbox[i++]); ) {
   c.onclick = function() {
-    if(this.checked === true) {
+    if (this.checked === true) {
       proxySynchronousFile(this.id)
     }
   }
 }
 ```
+
 缓存代理-计算乘积
-```bash
+
+```js
 var proxyMult = (function() {
   var cache = {}
   return function() {
     var args = Array.prototype.join.call(arguments, ',')
-    if(args in cache) {
+    if (args in cache) {
       return cache[args]
     }
-    return cache[args] = mult.apply(this, arguments)
+    return (cache[args] = mult.apply(this, arguments))
   }
 })()
 ```
+
 高阶函数动态创建代理
-```bash
+
+```js
 var mult = function() {
   var a = 1
-  for(var i = 0, l = arguments.length; i < l; i++) {
+  for (var i = 0, l = arguments.length; i < l; i++) {
     a *= arguments[i]
   }
   return a
@@ -118,7 +127,7 @@ var mult = function() {
 
 var plus = function() {
   var a = 0
-  for(var i = 0, l = arguments.length; i < l; i++) {
+  for (var i = 0, l = arguments.length; i < l; i++) {
     a += arguments[i]
   }
   return a
@@ -128,10 +137,10 @@ var createProxyFactory = function(fn) {
   var cache = {}
   return function() {
     var args = Array.prototype.join.call(arguments, ',')
-    if(args in cache) {
+    if (args in cache) {
       return cache[args]
     }
-    return cache[args] = fn.apply(this, arguments)
+    return (cache[args] = fn.apply(this, arguments))
   }
 }
 

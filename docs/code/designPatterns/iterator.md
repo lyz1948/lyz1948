@@ -1,7 +1,8 @@
 # 迭代器模式
 
 ### 外部迭代器
-```bash
+
+```js
 var Iterator = function(obj) {
   var current = 0
 
@@ -20,50 +21,53 @@ var Iterator = function(obj) {
   return {
     next: next,
     isDone: isDone,
-    getCurrItem: getCurrItem
+    getCurrItem: getCurrItem,
   }
 }
 ```
 
 ### 倒序迭代器
-```bash
+
+```js
 var reveresEach = function(ary, callback) {
-  for(var l = ary.length - 1; l >= 0; l--) {
+  for (var l = ary.length - 1; l >= 0; l--) {
     callback(l, ary[l])
   }
 }
 ```
 
 ### 终止迭代器
-```bash
+
+```js
 var each = function(ary, callback) {
-  for(var i = 0, l = ary.length; i < l; i++) {
-    if(callback(i, ary[i] === false)) {
+  for (var i = 0, l = ary.length; i < l; i++) {
+    if (callback(i, ary[i] === false)) {
       break
     }
   }
 }
 
 each([1, 2, 3, 4], function(i, n) {
-  if(n > 2) {
+  if (n > 2) {
     return false
   }
   console.log(n)
 })
-
 ```
+
 ### 迭代器例子
-```bash
+
+```js
 var getActiveUploadObj = function() {
-  try{
+  try {
     return new ActiveXObject('TXFTActiveX.FTNUpload')
-  } catch(e) {
+  } catch (e) {
     return false
   }
 }
 
 var getFlashUploadObj = function() {
-  if(supportFlash()) {
+  if (supportFlash()) {
     var str = '<object type="application/x-shockwave-flash"></object>'
     return $(str).appenTo($('body'))
   }
@@ -76,13 +80,17 @@ var getFormUploadObj = function() {
 }
 
 var iteratorUploadObj = function() {
-  for(var i = 0, fn; fn = arguments[i++];) {
+  for (var i = 0, fn; (fn = arguments[i++]); ) {
     var uploadObj = fn()
-    if(uploadObj !== false) {
+    if (uploadObj !== false) {
       return uploadObj
     }
   }
 }
 
-var uploadObj = iteratorUploadObj(getActiveUploadObj, getFlashUploadObj, getFormUploadObj)
+var uploadObj = iteratorUploadObj(
+  getActiveUploadObj,
+  getFlashUploadObj,
+  getFormUploadObj,
+)
 ```

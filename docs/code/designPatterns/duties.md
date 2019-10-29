@@ -1,22 +1,22 @@
 # 职责链模式
 
-```bash
+```js
 var order500 = function(orderType, pay, stock) {
-  if(orderType === 1 && pay === true) {
+  if (orderType === 1 && pay === true) {
     console.log('500元定金预购，优惠100元')
   } else {
     return 'nextSuccessor'
   }
 }
 var order200 = function(orderType, pay, stock) {
-  if(orderType === 2 && pay === true) {
+  if (orderType === 2 && pay === true) {
     console.log('200元定金预购，优惠50元')
   } else {
     return 'nextSuccessor'
   }
 }
 var orderNormal = function(orderType, pay, stock) {
-  if(stock > 0) {
+  if (stock > 0) {
     console.log('普通用户购买，无优惠')
   } else {
     console.log('库存不足')
@@ -35,8 +35,11 @@ Chain.prototype.setNextSuccessor = function(successor) {
 Chain.prototype.passRequest = function() {
   var ret = this.fn.apply(this, arguments)
 
-  if(ret === 'nextSuccessor') {
-    return this.successor && this.successor.passRequest.apply(this.successor, arguments)
+  if (ret === 'nextSuccessor') {
+    return (
+      this.successor &&
+      this.successor.passRequest.apply(this.successor, arguments)
+    )
   }
   return ret
 }
@@ -55,7 +58,7 @@ chainOrder500.passRequest(1, false, 0)
 
 // 需求改变，新增300元定金购买用户优惠方式
 var order300 = function(orderType, pay, stock) {
-  if(orderType === 3 && pay === true) {
+  if (orderType === 3 && pay === true) {
     console.log('300元定金用户，优惠80')
   } else {
     return 'nextSuccessor'
@@ -69,9 +72,13 @@ chainOrder200.setNextSuccessor(chainOrderNormal)
 ```
 
 ### 异步职责链
-```bash
+
+```js
 Chain.prototype.next = function() {
-  return this.successor && this.successor.passRequest.apply(this.successor, arguments)
+  return (
+    this.successor &&
+    this.successor.passRequest.apply(this.successor, arguments)
+  )
 }
 
 var fn1 = new Chain(function() {
@@ -93,16 +100,16 @@ var fn3 = new Chain(function() {
 
 fn1.setNextSuccessor(fn2).setNextSuccessor(fn3)
 fn1.passRequest()
-
 ```
 
-### 用AOP实现职责链
-```bash
+### 用 AOP 实现职责链
+
+```js
 Function.prototype.after = function(fn) {
   var self = this
   return function() {
     var ret = self.apply(this, arguments)
-    if(ret === 'nextSuccessor') {
+    if (ret === 'nextSuccessor') {
       return fn.apply(this, arguments)
     }
     return ret
@@ -115,4 +122,3 @@ order(1, true, 500)
 order(2, true, 500)
 order(1, false, 500)
 ```
-

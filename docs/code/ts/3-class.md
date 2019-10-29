@@ -2,6 +2,57 @@
 
 ```js
 class Person {
+  name
+
+  info() {
+    console.log(this.name)
+  }
+}
+
+class Person {
+  constructor(name: string) {
+    this.name = name
+  }
+
+  eat() {
+    console.log(this.name + 'is eatting')
+  }
+}
+
+// public 关键字
+class Person {
+  constructor(public name: string) {
+  }
+
+  eat() {
+    console.log(`${this.name} is eatting`)
+  }
+}
+
+let p1 = new Person()
+
+// extends 继承
+
+class Employee extends Person {
+  constructor(name: string, code: string) {
+    super(name)
+    this.code = code
+  }
+
+  code: string
+
+  work() {
+    super.eat()
+    this.doWork()
+  }
+  private doWork() {
+    console.log('start working')
+  }
+}
+```
+
+```js
+class Person {
   name: string
   age: number
 }

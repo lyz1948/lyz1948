@@ -1,12 +1,16 @@
-# 发布-订阅器模式
+# 设计模式
 
-```bash
+---
+
+## 发布-订阅器模式
+
+```js
 var salesOffices = {}
 
 salesOffices.clientList = {}
 
 salesOffices.listen = function(key, fn) {
-  if(!this.clientList[key]) {
+  if (!this.clientList[key]) {
     this.clientList[key] = []
   }
   this.clientList[key].push(fn)
@@ -16,11 +20,11 @@ salesOffices.trigger = function() {
   var key = Array.prototype.shift.call(arguments)
   var fns = this.clientList[key]
 
-  if(!fns || fns.length === 0) {
+  if (!fns || fns.length === 0) {
     return false
   }
 
-  for(var i = 0, fn; fn = fns[i++];) {
+  for (var i = 0, fn; (fn = fns[i++]); ) {
     fn.apply(this, arguments)
   }
 }
@@ -35,12 +39,14 @@ salesOffices.listen('suqareMeter120', function(price) {
 salesOffices.trigger('suqareMeter88', 30000)
 salesOffices.trigger('suqareMeter120', 40000)
 ```
+
 ### 通用发布订阅模式
-```bash
+
+```js
 var event = {
   clientList: [],
   listen: function(key, fn) {
-    if(!this.clientList[key]) {
+    if (!this.clientList[key]) {
       this.clientList[key] = []
     }
     this.clientList[key].push(fn)
@@ -49,45 +55,44 @@ var event = {
     var key = Array.prototype.shift.call(arguments)
     var fns = this.clientList[key]
 
-    if(!fns || fns.length === 0) {
+    if (!fns || fns.length === 0) {
       return false
     }
 
-    for(var i = 0, fn; fn = fns[i++];) {
+    for (var i = 0, fn; (fn = fns[i++]); ) {
       fn.apply(this, arguments)
     }
   },
   remove: function(key, fn) {
     var fns = this.clientList[key]
 
-    if(!fns) {
+    if (!fns) {
       return false
     }
 
-    if(!fn) {
+    if (!fn) {
       fns && (fns.length = 0)
     } else {
-      for(var l = fns.length - 1; l >= 0; l--) {
+      for (var l = fns.length - 1; l >= 0; l--) {
         var _fn = fns[l]
-        if(_fn === fn) {
+        if (_fn === fn) {
           fns.splice(l, 1)
         }
       }
     }
-  }
+  },
 }
 
 var installEvent = function(obj) {
-  for(var i in event) {
+  for (var i in event) {
     obj[i] = event[i]
   }
 }
-
 ```
 
 ### 发布订阅模式-网站登录例子
-```bash
 
+```js
 $.ajax('http://xxx.abc.com?login', function(data) {
   login.trigger('loginSucc', data)
 })
@@ -99,7 +104,7 @@ var header = (function() {
   return {
     setAvatar: function(data) {
       console.log('设置 header 模块头像')
-    }
+    },
   }
 })()
 
@@ -110,7 +115,7 @@ var nav = (function() {
   return {
     setAvatar: function(data) {
       console.log('设置 nav 模块头像')
-    }
+    },
   }
 })()
 
@@ -121,12 +126,14 @@ var address = (function() {
   return {
     setAvatar: function(addr) {
       console.log('刷新收货地址')
-    }
+    },
   }
 })()
 ```
+
 ### 全局的发布订阅对象
-```bash
+
+```js
 var Event = (function() {
   var clientList = {},
       listen,
@@ -152,10 +159,12 @@ var Event = (function() {
   }
 
   remove = function(key, fn) {
+
     var fns = clientList[key]
     if(!fns) {
       return false
     }
+
     if(!fn) {
       fns && fns.length = 0
     } else {

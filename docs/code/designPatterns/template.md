@@ -1,23 +1,23 @@
 # 模板方法模式
 
-```bash
-var Beverage = function(){}
+```js
+var Beverage = function() {}
 
-Beverage.prototype.boilWater = function(){
-  console.log( '把水煮沸' )
+Beverage.prototype.boilWater = function() {
+  console.log('把水煮沸')
 }
 
-Beverage.prototype.brew = function(){
+Beverage.prototype.brew = function() {
   // 空方法，由子类重写
   throw new Error('子类必须重写 brew 方法')
 }
 
-Beverage.prototype.pourInCup = function(){
+Beverage.prototype.pourInCup = function() {
   // 空方法，由子类重写
   throw new Error('子类必须重写 brew 方法')
 }
 
-Beverage.prototype.addCondiments = function(){
+Beverage.prototype.addCondiments = function() {
   // 空方法，由子类重写
   throw new Error('子类必须重写 brew 方法')
 }
@@ -27,11 +27,11 @@ Beverage.prototype.customerWantCondiments = function() {
   return true
 }
 
-Beverage.prototype.init = function(){
+Beverage.prototype.init = function() {
   this.boilWater()
   this.brew()
   this.pourInCup()
-  if(this.customerWantCondiments()) {
+  if (this.customerWantCondiments()) {
     this.addCondiments()
   }
 }
@@ -78,28 +78,33 @@ Tea.prototype.addCondiments = function() {
 
 var tea = new Tea()
 tea.init()
-
 ```
-### 真的需要继承吗？
-```bash
 
+真的需要继承吗？
+
+```js
 var Beverage = function(param) {
-
   var boilWater = function() {
     console.log('把水煮沸')
   }
 
-  var brew = param.brew || function() {
-    throw new Error('必须传递 brew 方法')
-  }
+  var brew =
+    param.brew ||
+    function() {
+      throw new Error('必须传递 brew 方法')
+    }
 
-  var pourInCup = param.pourInCup || function() {
-    throw new Error('必须传递 pourInCup 方法')
-  }
+  var pourInCup =
+    param.pourInCup ||
+    function() {
+      throw new Error('必须传递 pourInCup 方法')
+    }
 
-  var addCondiments = param.addCondiments || function() {
-    throw new Error('必须传递 addCondiments 方法')
-  }
+  var addCondiments =
+    param.addCondiments ||
+    function() {
+      throw new Error('必须传递 addCondiments 方法')
+    }
 
   var F = function() {}
 
@@ -121,7 +126,7 @@ var Coffee = Beverage({
   },
   addCondiments: function() {
     console.log('加牛奶和糖')
-  }
+  },
 })
 var Tea = Beverage({
   brew: function() {
@@ -132,7 +137,7 @@ var Tea = Beverage({
   },
   addCondiments: function() {
     console.log('加🍋')
-  }
+  },
 })
 
 var coffee = new Coffee()
