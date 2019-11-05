@@ -24,7 +24,7 @@ const myMap = function(fn, ctx) {
 
 ## 带有重复项
 
-使用递归。对于给定字符串中的每个字母，为字母创建字谜。使用 map（）将字母与每部分字谜组合，然后使用 reduce（）将所有字谜组合到一个数组中，最基本情况是字符串长度等于 2 或 1。
+使用递归。对于给定字符串中的每个字母，为字母创建字谜。使用 map()将字母与每部分字谜组合，然后使用 reduce()将所有字谜组合到一个数组中，最基本情况是字符串长度等于 2 或 1。
 
 ```js
 const anagrams = str => {
@@ -38,7 +38,7 @@ anagrams('abc') => ['abc', 'cba', 'cab', 'bac', 'bca', 'acb']
 
 ## 数组平均数
 
-使用 reduce（）将每个值添加到累加器，初始值为 0，总和除以数组长度。
+使用 reduce()将每个值添加到累加器，初始值为 0，总和除以数组长度。
 
 ```js
 const average = arr => arr.reduce((acc, val) => acc + val, 0) / arr.length
@@ -48,7 +48,7 @@ average([1,5,8]) => 7
 
 ## 大写每个单词的首字母
 
-使用 replace（）匹配每个单词的第一个字符，并使用 toUpperCase（）来将其大写。
+使用 replace()匹配每个单词的第一个字符，并使用 toUpperCase()来将其大写。
 
 ```js
 const capitalizeEveryWord = str =>
@@ -57,7 +57,7 @@ const capitalizeEveryWord = str =>
 
 ## 首字母大写
 
-使用 slice（0,1）和 toUpperCase（）大写第一个字母，slice（1）获取字符串的其余部分。 省略 lowerRest 参数以保持字符串的其余部分不变，或将其设置为 true 以转换为小写。（注意：这和上一个示例不是同一件事情）
+使用 slice（0,1）和 toUpperCase()大写第一个字母，slice（1）获取字符串的其余部分。 省略 lowerRest 参数以保持字符串的其余部分不变，或将其设置为 true 以转换为小写。（注意：这和上一个示例不是同一件事情）
 
 ```js
 const capitalize = (str, lowerRest = false) =>
@@ -67,7 +67,7 @@ const capitalize = (str, lowerRest = false) =>
 
 ## 检查回文
 
-将字符串转换为 toLowerCase（），并使用 replace（）从中删除非字母的字符。然后，将其转换为 tolowerCase（），将（’‘）拆分为单独字符，reverse（），join（’‘），与原始的非反转字符串进行比较，然后将其转换为 tolowerCase（）。
+将字符串转换为 toLowerCase()，并使用 replace()从中删除非字母的字符。然后，将其转换为 tolowerCase()，将（’‘）拆分为单独字符，reverse()，join（’‘），与原始的非反转字符串进行比较，然后将其转换为 tolowerCase()。
 
 ```js
 function isPalindrome(text) {
@@ -94,11 +94,11 @@ const palindrome = str => {
 
 ## 计数数组中值的出现次数
 
-每次遇到数组中的特定值时，使用 reduce（）来递增计数器。
+每次遇到数组中的特定值时，使用 reduce()来递增计数器。
 
 ```js
 const countOccurrences = (arr, value) =>
-  arr.reduce((acc, val) => (val === value ? a + 1 : a + 0), 0)
+  arr.reduce((acc, val) => (val === value ? acc + 1 : acc + 0), 0)
 ```
 
 ## URL
@@ -128,7 +128,7 @@ const flatten = arr => arr.reduce((a, v) => a.concat(v), [])
 
 ## 深度数组扁平
 
-使用递归，使用 reduce（）来获取所有不是数组的元素，flatten 每个元素都是数组。
+使用递归，使用 reduce()来获取所有不是数组的元素，flatten 每个元素都是数组。
 
 ```js
 const deepFlatten = arr =>
@@ -137,7 +137,7 @@ const deepFlatten = arr =>
 
 ## 数组之间的区别
 
-从 b 创建一个 Set，然后在 a 上使用 Array.filter（），只保留 b 中不包含的值
+从 b 创建一个 Set，然后在 a 上使用 Array.filter()，只保留 b 中包含的值
 
 ```js
 const diff = (a, b) => {
@@ -148,7 +148,7 @@ const diff = (a, b) => {
 
 ## 两点之间的距离
 
-使用 Math.hypot（）计算两点之间的欧几里德距离。
+使用 Math.hypot()计算两点之间的欧几里德距离。
 
 ```js
 const distance = (x1, y1, x2, y2) => Math.hypot(x2 - x1, y2 - y1)
@@ -164,7 +164,7 @@ const isDivisible = (dividend, divisor) => dividend % divisor === 0
 
 ## 转义正则表达式
 
-使用 replace（）来转义特殊字符。
+使用 replace()来转义特殊字符。
 
 ```js
 const escapeRE = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -173,7 +173,7 @@ escapeRE('(test)') -> \\(test\\)
 
 ## 偶数或奇数
 
-使用 Math.abs（）将逻辑扩展为负数，使用模（％）运算符进行检查。 如果数字是偶数，则返回 true；如果数字是奇数，则返回 false。
+使用 Math.abs() 将逻辑扩展为负数，使用模（％）运算符进行检查。 如果数字是偶数，则返回 true；如果数字是奇数，则返回 false。
 
 ```js
 const isEven = num => num % 2 === 0
@@ -189,7 +189,7 @@ const factorial = n => (n <= 1 ? 1 : n * factorial(n - 1))
 
 ## 斐波那契数组生成器
 
-创建一个特定长度的空数组，初始化前两个值（0 和 1）。使用 Array.reduce（）向数组中添加值，后面的一个数等于前面两个数相加之和（前两个除外）。
+创建一个特定长度的空数组，初始化前两个值（0 和 1）。使用 Array.reduce()向数组中添加值，后面的一个数等于前面两个数相加之和（前两个除外）。
 
 ```js
 const fibnocci = n =>
@@ -200,7 +200,7 @@ const fibnocci = n =>
 
 ## 过滤数组中的非唯一值
 
-将 Array.filter（）用于仅包含唯一值的数组。
+将 Array.filter()用于仅包含唯一值的数组。
 
 ```js
 const filterNonUnique = arr =>
@@ -209,7 +209,7 @@ const filterNonUnique = arr =>
 
 ## 获取数组最大值
 
-使用 Math.max（）与 spread 运算符（…）结合得到数组中的最大值
+使用 Math.max()与 spread 运算符（…）结合得到数组中的最大值
 
 ```js
 const arrMax = arr => Math.max(...arr)
@@ -217,7 +217,7 @@ const arrMax = arr => Math.max(...arr)
 
 ## 从数组中获取最小值
 
-使用 Math.min（）与 spread 运算符（…）结合得到数组中的最大值
+使用 Math.min()与 spread 运算符（…）结合得到数组中的最大值
 
 ```js
 const arrMin = arr => Math.min(...arr)
@@ -253,7 +253,7 @@ const arrHead = arr => arr.slice(0, 1)
 
 ## last
 
-截取数组最后一个元素
+截取数组排除最后一个元素
 
 ```js
 const notLast = arr => arr.slice(0, -1)
@@ -264,7 +264,7 @@ const notLast = arr => arr.slice(0, -1)
 传入结束与开始的数值，填充到数组内
 
 ```js
-const initArrayRange = (end, start = 0) => Array.apply(null, Array(end - start).map((v, i) => i + start)
+const initArrayRange = (end, start = 0) => Array.apply(null, Array(end - start).map((v, i) => i + start))
 ```
 
 ## 用值初始化数组
@@ -291,18 +291,9 @@ const tail = arr => arr.slice(-1)[0]
 const timeTaken = callback => {
   console.time('timeTaken')
   const res = callback()
-  console.time('timeTaken')
+  console.timeEnd('timeTaken')
   return res
 }
-```
-
-## ArrToObject
-
-二维数组转为对象
-
-```js
-const ArrToObject = arr =>
-  arr.reduce((arr, val) => (arr[(val[0] = val[1])], arr), {})
 ```
 
 ## pipe
@@ -343,11 +334,57 @@ const randomRange = (min, max) => Math.random() * (max - min) + min
 const shuffle = arr => arr.sort(() => Math.random() - 0.5)
 ```
 
+## 数组之间的相似性
+
+```js
+const similarity = (arr, value) => arr.filter(v => value.includes(v))
+```
+
+## 数组总和
+
+```js
+const sum = arr => arr.reduce((acc, val) => acc + val, 0)
+```
+
+## 交换 2 个变量的值
+
+```js
+;[varA, varB] = [varB, varA]
+```
+
+## 砍掉数组的第一个元素
+
+```js
+const strTail = arr => (arr.length > 1 ? arr.slice(1) : arr)
+```
+
+## 除去数组中重复的值
+
+```js
+const unique = arr => [...new Set(arr)]
+```
+
 ## 重定向到 URL
 
 ```js
 const redirect = (url, asLink = true) =>
   asLink ? (window.location.href = url) : window.location.replace(url)
+```
+
+## 按字符串排序字符串
+
+```js
+const sortCharactersInString = str =>
+  str
+    .split('')
+    .sort((a, b) => a.localeCompare(b))
+    .join('')
+```
+
+## 按字符串排序数组字符串
+
+```js
+const sortCharacterInArray = arr => arr.sort((a, b) => a.localeCompare(b))
 ```
 
 ## 反转一个字符串
@@ -370,64 +407,9 @@ const scrollToTop = _ => {
   let st = document.documentElement.scrollTop || document.body.scrollTop
   if (st > 0) {
     window.requestAnimationFrame(scrollToTop)
-    window.scrollTop(0, st - st / 8)
+    window.scrollTo(0, st - st / 8)
   }
 }
-```
-
-## 随机数组值
-
-```js
-const arrShuffle = arr => {
-  let r = arr.map(Math.random)
-  return arr.sort((a, b) => r[a] - r[b])
-}
-```
-
-## 数组之间的相似性
-
-```js
-const similarity = (arr, value) => arr.filter(v => value.includes(v))
-```
-
-## 数组总和
-
-```js
-const sum = arr => arr.reduce((acc, val) => acc + val, 0)
-```
-
-## 按字符串排序字符串
-
-```js
-const sortCharactersInString = str =>
-  str
-    .split('')
-    .sort((a, b) => a.localeCompare(b))
-    .join('')
-```
-
-## 按字符串排序数组字符串
-
-```js
-const sortCharacterInArray = arr => arr.sort((a, b) => a.localeCompare(b))
-```
-
-## 交换 2 个变量的值
-
-```js
-;[varA, varB] = [varB, varA]
-```
-
-## 砍掉数组的第一个元素
-
-```js
-const strTail = arr => (arr.length > 1 ? arr.slice(1) : arr)
-```
-
-## 除去数组中重复的值
-
-```js
-const unique = arr => [...new Set(arr)]
 ```
 
 ## URL 参数序列化

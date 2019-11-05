@@ -467,6 +467,8 @@ compilie 原理?
 
 ### Vue 依赖收集
 
+vue依赖收集是在created之前，render生成虚拟dom的时候
+
 ## 前端攻击方式：xss, csrf,网络劫持
 
 ## esmodule 和 commonjs 的区别
@@ -512,5 +514,16 @@ String.prototype.render = function(obj) {
   with (obj) {
     return eval('`' + this + '`')
   }
+}
+
+```
+
+template 模板方法
+
+```js
+function template(html, obj) {
+  return html.replace(/{{(.*?)}}/g, function(match, key) {
+    return obj[key.trim()]
+  })
 }
 ```
