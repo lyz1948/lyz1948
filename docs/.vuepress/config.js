@@ -13,7 +13,6 @@ module.exports = {
     displayAllHeaders: false,
     nav: [
       { text: 'Code', link: '/' },
-      { text: 'Note', link: '/note/' },
       {
         text: 'Get it',
         items: [
