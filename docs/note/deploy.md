@@ -1,50 +1,10 @@
-# 服务器部署
+# Ubuntu服务器部署
 
-## 查看系统盘信息
-
-```js
-fdisk l
-df -h
-```
-
-## 快捷方式登录服务器
-
-在.zshrc中加入下面代码
+## ssh连接到服务器
 
 ```bash
-alias ssh_ykpine="ssh ubuntu@xxx.xx.xxx.xx"
+ssh -p yourport username@ip
 ```
-
-## 服务器添加新用户
-
-```bash
-adduser 名字
-```
-
-1. 填写新用户的密码
-2. 确认新用户密码
-3. 输入名字与其他信息（可不输入）
-
-```bash
-gpasswd -a [username] sudo
-sudo visudo
-```
-
-- 添加以下内容 root ALL=(ALL:ALL) ALL的下面
-
-```bash
-[username] ALL=(ALL:ALL) ALL
-```
-
-重启ssh
-
-```bash
-service ssh restart
-```
-
-::: warning
-修改ssh配置文件 注意：修改之前先新开一个命令行窗口，并登录进入，以免修改错误无法登录:）
-:::
 
 ## 免密码登录(用新增的用户登录)
 
@@ -247,3 +207,7 @@ echo fs.inotify.max_user_watches=523288 | sudo tee -a /etc/sysctl.conf && sudo s
 ## 安装nginx
 
 `nginx`的安装与使用[nginx](./nginx)
+
+## 安装mongodb
+
+`nginx`的安装与使用[nginx](./mongodb)

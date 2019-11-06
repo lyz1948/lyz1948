@@ -24,21 +24,6 @@ module.exports = {
       }
     ],
     sidebar: {
-      '/note/': [
-        '/note/',
-        '/note/centos',
-        '/note/deploy',
-        '/note/editor',
-        '/note/git',
-        '/note/gitbook',
-        '/note/interview',
-        '/note/mongodb',
-        '/note/nginx',
-        '/note/nvm',
-        '/note/pm2',
-        '/note/ssh',
-        '/note/tslint',
-      ],
       '/getit/': [
         '/getit/',
         '/getit/finance/',
