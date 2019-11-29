@@ -30,6 +30,7 @@ module.exports = {
         '/getit/literature/'
       ],
       '/': [
+        '/note/001',
         {
           title: 'Javascript',
           children: [
