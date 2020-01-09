@@ -893,7 +893,7 @@ const throttle = (fn, wait) => {
     } else {
       clearTimeout(lastFn)
       lastFn = setTimeout(() => {
-        if (wait > Date.now() - lastTime) {
+        if (Date.now() - lastTime >= wait) {
           fn.apply(context, args)
           lastTime = Date.now()
         }
