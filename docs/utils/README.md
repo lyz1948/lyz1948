@@ -264,7 +264,11 @@ const notLast = arr => arr.slice(0, -1)
 传入结束与开始的数值，填充到数组内
 
 ```js
-const initArrayRange = (end, start = 0) => Array.apply(null, Array(end - start).map((v, i) => i + start))
+const initArrayRange = (end, start = 0) =>
+  Array.apply(
+    null,
+    Array(end - start).map((v, i) => i + start),
+  )
 ```
 
 ## 用值初始化数组
@@ -302,10 +306,7 @@ const timeTaken = callback => {
 
 ```js
 const pipe = (...funcs) => arg => funcs.reduce((acc, func) => func(acc), arg)
-pipe(
-  btoa,
-  x => x.toUpperCase(),
-)('Hello')
+pipe(btoa, x => x.toUpperCase())('Hello')
 ```
 
 ## powerset
@@ -1409,8 +1410,9 @@ function $$(select, context) {
 
 ```js
 var autoCenter = function(el) {
-  var vW = document.documentElement.clientWidth
-  var vH = document.documentElement.clientHeight
+  var docEl = document.documentElement
+  var vW = docEl.clientWidth
+  var vH = docEl.clientHeight
   var elW = el.offsetWidth
   var elH = el.offsetHeight
 
@@ -1471,12 +1473,23 @@ function getStyle(obj, attr) {
 ## 浏览器前缀
 
 ```js
-function autoPrefixer(obj, name, value) {
-  obj.style['Webkit' + name.charAt(0).toUpperCase() + name.substring(1)] = value
-  obj.style['Moz' + name.charAt(0).toUpperCase() + name.substring(1)] = value
-  obj.style['ms' + name.charAt(0).toUpperCase() + name.substring(1)] = value
-  obj.style['O' + name.charAt(0).toUpperCase() + name.substring(1)] = value
-  obj.style[name] = value
+let domStyle = document.createElement('div').style
+
+;(function vendor(obj, name, value) {
+  const vendors = ['Webkit', 'Moz', 'ms', 'O', 'standard']
+  const caseName = name.charAt(0).toUpperCase() + name.substring(1)
+  for (key in vendors) {
+    if (domStyle[vendors[key]] !== 'undefined') {
+      return key
+    }
+    return false
+  }
+})()
+
+const prefixStyle = style => {
+  if (vendor === false) return false
+  if (vendor === 'standard') return style
+  return vendor + style.charAt(0).toUpperCase() + style.substr(1)
 }
 ```
 
@@ -1739,13 +1752,12 @@ function drag(obj, obj2) {
 
 ```js
 function limits(iNow, iMin, iMax) {
-  if (iNow > iMax) {
-    return iMax
-  } else if (iNow < iMin) {
-    return iMin
-  } else {
-    return iNow
-  }
+  return iNow > iMax
+    ? iMax
+    : iNow < iMin
+      ? iMin
+      : iNow
+  
 }
 ```
 
@@ -1838,6 +1850,7 @@ window.onorientationchange = function() {
   win.addEventListener(resizeEvt, recalc, false)
   doc.addEventListener('DOMContentLoaded', recalc, false)
 })(window, document)
+
 ;(function(win) {
   var doc = win.document
   var docEl = doc.documentElement
@@ -1894,11 +1907,13 @@ document.addEventListener('DOMContentLoaded', recalc, false)
 
 ### 检查是否是数组
 
+```js
 if (!Array.isArray) {
-Array.isArray = function(arg) {
-return Object.prototype.toString.call(arg) === '[object Array]'
+  Array.isArray = function(arg) {
+    return Object.prototype.toString.call(arg) === '[object Array]'
+  }
 }
-}
+```
 
 ### 检查 NaN 的安全性
 
@@ -1920,7 +1935,7 @@ if (!number.isNaN) {
 
 ```js
 function isNegZero(n) {
-  n = Number(0)
+  n = Number(n)
   return n === 0 && 1 / n === -Infinity
 }
 ```

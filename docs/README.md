@@ -1,5 +1,3 @@
----
-pageClass: github-repo
----
+<!-- demo -->
 
-<GitRepo />
+<ListItem />

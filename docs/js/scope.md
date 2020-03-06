@@ -2,7 +2,7 @@
 
 预解析
 
-::: tip
+::: tip 解析流程
 预解析：
   查找关键字：如var functioin 参数等
   当关键字var 和 function 重名的时候只保留function
