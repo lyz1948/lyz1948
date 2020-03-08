@@ -1,6 +1,9 @@
 
-## 加载动画
+## 动画-圆点环形运动
 
+animate 
+
+transform, rotate, animation
 
 <CodeDemo :collapse="true">
   <template slot="code-template">
@@ -14,5 +17,3 @@
   </template>
   <Loading6 slot="demo"/>
 </CodeDemo>
-
-transform, rotate, animation

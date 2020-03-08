@@ -1,6 +1,9 @@
 
-## 圆环动画
-Animation, Css
+## 动画-圆周运动
+
+animate Animation, Css
+
+transform, rotate, animation
 
 <CodeDemo :collapse="true">
   <template slot="code-template">
@@ -14,5 +17,3 @@ Animation, Css
   </template>
   <Loading1 slot="demo"/>
 </CodeDemo>
-
-transform, rotate, animation

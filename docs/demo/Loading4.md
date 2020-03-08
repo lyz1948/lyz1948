@@ -1,6 +1,9 @@
 
-## 加载动画
+## 动画-呼吸心跳
 
+animate 
+
+transform, rotate, animation
 
 <CodeDemo :collapse="true">
   <template slot="code-template">
@@ -14,5 +17,3 @@
   </template>
   <Loading4 slot="demo"/>
 </CodeDemo>
-
-transform, rotate, animation

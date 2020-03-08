@@ -1,6 +1,9 @@
 
-## 进度条动画
+## 动画-三个圆点跳动
 
+animate 
+
+transform, rotate, animation
 
 <CodeDemo :collapse="true">
   <template slot="code-template">
@@ -14,5 +17,3 @@
   </template>
   <Loading2 slot="demo"/>
 </CodeDemo>
-
-transform, rotate, animation
