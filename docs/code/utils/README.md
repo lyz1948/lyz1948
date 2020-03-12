@@ -1,5 +1,34 @@
 # 工具方法
 
+## 是否包含字符串
+
+```js
+function stringContainer(str, val) {
+  return str.indexOf(val) > -1
+}
+```
+
+## 类型检查
+
+```js
+const is = {
+  arr: v => Array.isArray(v),
+  obj: v => stringContainer(v, 'Object'),
+  svg: v => v instanceof SVGElement,
+  inp: v => v instanceof HTMLInputElement,
+  dom: v => v.nodeType || is.svg(v),
+  str: v => typeof v === 'string',
+  fun: v => typeof v === 'function',
+  und: v => typeof v === 'undefined',
+  hex: v => /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(v),
+  rgb: v => /^rgb/.test(v),
+  hsl: v => /^hsl/.test(v),
+  col: v => is.hex(v) || is.rgb(v) || is.hsl(v),
+}
+```
+
+
+
 ## Map 方法
 
 ```js
@@ -1725,11 +1754,11 @@ function drag(obj, obj2) {
       var T = ev.clientY - disY
 
       if (obj2) {
-        L = limits(L, 0, obj2.offsetWidth - obj.offsetWidth)
-        T = limits(T, 0, obj2.offsetHeight - obj.offsetHeight)
+        L = minMax(L, 0, obj2.offsetWidth - obj.offsetWidth)
+        T = minMax(T, 0, obj2.offsetHeight - obj.offsetHeight)
       } else {
-        L = limits(L, 0, document.documentElement.clientWidth - obj.offsetWidth)
-        T = limits(
+        L = minMax(L, 0, document.documentElement.clientWidth - obj.offsetWidth)
+        T = minMax(
           T,
           0,
           document.documentElement.clientHeight - obj.offsetHeight,
@@ -1751,13 +1780,8 @@ function drag(obj, obj2) {
 ## 限制范围
 
 ```js
-function limits(iNow, iMin, iMax) {
-  return iNow > iMax
-    ? iMax
-    : iNow < iMin
-      ? iMin
-      : iNow
-  
+function minMax(val, min, max) {
+  return Math.min(Math.max(val, min), max)
 }
 ```
 
