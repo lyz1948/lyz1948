@@ -8,6 +8,7 @@ module.exports = {
   title: 'StudyTime',
   description: '记录和整理生活、工作与学习的知识，致力成为一名终身学习者！',
   head: [
+    ['link', { rel: 'icon', href: '/imags/favicon.ico' }],
     ['link', { rel: 'manifest', href: '/manifest.json' }],
     ['link', { rel: 'apple-touch-icon', href: '/imags/logo.png' }],
   ],
@@ -39,6 +40,7 @@ module.exports = {
     displayAllHeaders: true,
     smoothScroll: true,
     lastUpdated: '最近更新',
+    logo: '/images/logo.png',
     nav: [
       { text: '实验室', link: '/' },
       { text: 'Code', items: [
