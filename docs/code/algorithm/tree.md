@@ -17,7 +17,7 @@ function BinarySearchTree() {
 
   let root = null
 
-  # 向树中插入一个新的键
+  // 向树中插入一个新的键
   this.insert = function(key) {
     let newNode = new Node(key)
     if(root === null) {
@@ -27,33 +27,36 @@ function BinarySearchTree() {
     }
   }
 
-  # 在树中查找一个键，如果节点存在，则返回true;如果不存在，则返回false
+  // 在树中查找一个键，如果节点存在，则返回true;如果不存在，则返回false
   this.search = function(key) {
     return searchNode(root, key)
   }
-  # 通过中序遍历方式遍历所有节点
+  // 通过中序遍历方式遍历所有节点
   this.inOrderTraverse = function(callback) {
     inOrderTraverseNode(root, callback)
   }
-  # 通过先序遍历方式遍历所有节点
+  // 通过先序遍历方式遍历所有节点
   this.preOrderTraverse = function(callback) {
     preOrderTraverseNode(root, callback)
   }
-  # 通过后序遍历方式遍历所有节点
+  // 通过后序遍历方式遍历所有节点
   this.postOrderTraverse = function(callback) {
     postOrderTraverseNode(root, callback)
   }
-  # 返回树种最小的值/键
-  this.min = function() {
-    return minNode(root)
-  }
-  # 返回树种最大的值/键
-  this.max = function() {
-    return this.maxNode(root)
-  }
-  # 从树种移除某个键
-  this.remove = function(key) {
 
+  // 返回树种最小的值
+  this.min = function() {
+    return findMinNode(root)
+  }
+
+  // 返回树种最大的值
+  this.max = function() {
+    return findMaxNode(root)
+  }
+
+  // 从树种移除某个键
+  this.remove = function(key) {
+    return removeNode(root, key)
   }
 
   const insertNode = function(node, newNode) {
@@ -72,7 +75,7 @@ function BinarySearchTree() {
     }
   }
 
-  # 中序遍历(从小到大)
+  // 中序遍历(从小到大)
   const inOrderTraverseNode = function(node, callback) {
     if(node !== null) {
       inOrderTraverseNode(node.left, callback)
@@ -81,7 +84,7 @@ function BinarySearchTree() {
     }
   }
 
-  # 先序遍历(先左后右)
+  // 先序遍历(先左后右)
   const preOrderTraverseNode = function(node, callback) {
     if(node !== null) {
       callback(node.key)
@@ -90,7 +93,7 @@ function BinarySearchTree() {
     }
   }
 
-  # 后序遍历
+  // 后序遍历
   const postOrderTraverseNode = function(node, callback) {
     if(node !== null) {
       postOrderTraverseNode(node.left, callback)
@@ -99,7 +102,7 @@ function BinarySearchTree() {
     }
   }
 
-  # 查找一个特定的值
+  // 查找一个特定的值
   const searchNode = function(node, key) {
     if(node === null) {
       return false
@@ -112,6 +115,8 @@ function BinarySearchTree() {
       return true
     }
   }
+
+  // 查找最小值
   const findMinNode = function(node) {
     if(node) {
       while(node && node.left !== null) {
@@ -119,21 +124,11 @@ function BinarySearchTree() {
       }
       return node
     }
-  }
-
-  # 查找最新值
-  const minNode = function(node) {
-    if(node) {
-      while(node && node.left !== null) {
-        node = node.left
-      }
-      return node.key
-    }
     return null
   }
 
-  # 查找最大值
-  const maxNode = function(node) {
+  // 查找最大值
+  const findMaxNode = function(node) {
     if(node) {
       while(node && node.right !== null) {
         node = node.right
@@ -143,7 +138,7 @@ function BinarySearchTree() {
     return null
   }
 
-  # 移除一个节点
+  // 移除一个节点
   const removeNode = function(node, key) {
     if(node === null) {
       return null
@@ -155,12 +150,12 @@ function BinarySearchTree() {
       node.right = removeNode(node.right, key)
       return node
     } else {
-      # 情况1：该节点是一个叶节点
+      // 情况1：该节点是一个叶节点
       if(node.left === null && node.right === null) {
         node = null
         return node
       }
-      # 情况2：该节点有一个子节点
+      // 情况2：该节点有一个子节点
       if(node.left === null) {
         node = node.right
         return node
@@ -169,7 +164,7 @@ function BinarySearchTree() {
         return node
       }
 
-      # 情况3：该节点有2个子节点
+      // 情况3：该节点有2个子节点
       var temp = findMinNode(node.right)
       node.key == temp.key
       node.right = removeNode(node.right, temp.key)

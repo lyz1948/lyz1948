@@ -122,7 +122,7 @@ module.exports = {
         '/code/ts/7-enums',
         '/code/ts/8-inference',
       ],
-      '/code/libs/': ['/code/libs/30sec', '/code/libs/goodjs'],
+      '/code/libs/': ['/code/libs/30sec', '/code/libs/goodjs', '/code/libs/koa'],
       '/code/utils/': ['/code/utils/'],
       '/code/designPatterns/': [
         {
