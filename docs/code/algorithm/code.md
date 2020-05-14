@@ -18,3 +18,49 @@ function dailyTemperatures(arr) {
   return res
 }
 ```
+
+## 最小栈
+
+```js
+const MiniStack = function() {
+  this.stack1 = []
+  this.stack2 = []
+}
+
+MiniStack.prototype = {
+  constructor: MiniStack,
+
+  push: function(v) {
+    this.stack1.push(v)
+    // 如果 stack2 为空，或者插入的值比 stack2中最后一个值小
+    if (!this.stack2.length || this.stack2[this.stack2.length - 1] >= v) {
+      this.stack2.push(v)
+    }
+  },
+
+  pop: function() {
+    // 如果出栈的是最小值，同步更新 stack2
+    if (this.stack1.pop() === this.stack2[this.stack2.length - 1]) {
+      this.stack2.pop()
+    }
+  },
+
+  empty: function() {
+    this.stack1 = []
+    this.stack2 = []
+  },
+
+  isEmpty: function() {
+    return !this.stack1.length
+  },
+
+  head: function() {
+    return this.stack1[this.stack1.length -1]
+  },
+
+  getMin: function() {
+    return this.stack2[this.stack2.length -1]
+  }
+}
+
+```
