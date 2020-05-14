@@ -64,3 +64,40 @@ MiniStack.prototype = {
 }
 
 ```
+
+## 用栈实现队列
+
+```js
+const StackToQueeue = function() {
+  this.stack1 = []
+  this.stack2 = []
+}
+
+StackToQueeue.prototype = {
+  constructor: StackToQueeue,
+
+  push: function(v) {
+    this.stack1.push(v)
+  },
+
+  pop: function() {
+    if (!this.stack2.length) {
+      while (this.stack1.length) {
+        this.stack2.push(this.stack1.pop())
+      }
+    }
+  },
+
+  peek: function() {
+    if (!this.stack2.length) {
+      while (this.stack1.length) {
+        this.stack2.push(this.stack1.pop())
+      }
+    }
+    const stack2Len = this.stack2.length
+    return stack2Len && this.stack2[stack2Len - 1]
+  },
+
+  isEempty: function() {},
+}
+```
