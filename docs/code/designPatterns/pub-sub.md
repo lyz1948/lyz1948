@@ -1,8 +1,4 @@
-# 设计模式
-
----
-
-## 发布-订阅器模式
+# 发布-订阅器模式
 
 ```js
 var salesOffices = {}
@@ -40,7 +36,7 @@ salesOffices.trigger('suqareMeter88', 30000)
 salesOffices.trigger('suqareMeter120', 40000)
 ```
 
-### 通用发布订阅模式
+## 通用发布订阅模式
 
 ```js
 var event = {
@@ -90,7 +86,7 @@ var installEvent = function(obj) {
 }
 ```
 
-### 发布订阅模式-网站登录例子
+## 发布订阅模式-网站登录例子
 
 ```js
 $.ajax('http://xxx.abc.com?login', function(data) {
@@ -131,7 +127,7 @@ var address = (function() {
 })()
 ```
 
-### 全局的发布订阅对象
+## 全局的发布订阅对象
 
 ```js
 var Event = (function() {
