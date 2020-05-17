@@ -1,6 +1,6 @@
 # 策略模式
 
-策略模式计算奖金
+## 策略模式计算奖金
 
 ```js
 var strategies = {
@@ -39,7 +39,7 @@ var calculateBouns = function(func, salary) {
 calculateBouns(S, 10000)
 ```
 
-##### 策略模式表单校验
+## 策略模式表单校验
 
 策略对象
 
@@ -67,7 +67,7 @@ var strategies = {
 Validator 类
 
 ```js
-var validataFunc = function() {
+var validateFunc = function() {
   // 创建validator对象
   var validator = new Validator()
 
