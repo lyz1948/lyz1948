@@ -20,7 +20,7 @@ let octalDigt: number = 0o744
 ```js
 let name: string = 'john'
 let age: number = 20
-let sentence: string = `Hello, my name is ${namge} nad my old year is ${age}`
+let sentence: string = `Hello, my name is ${name} nad my old year is ${age}`
 ```
 
 ## 数组

@@ -6,3 +6,5 @@ docs/.vuepress/*
 examples/**/node_modules
 examples/**/dist
 package-lock.json
+
+test.*

@@ -40,44 +40,6 @@ const swap = function(index1, index2) {
 }
 ```
 
-```js
-var arr = [7, 2, 5, 3, 4, 8, 1]
-var maopaoSort = function(arr) {
-  for (var i = 0; i < arr.length; i++) {
-    for (var j = 0; j < arr.length - i; j++) {
-      transposition(j, j + 1)
-    }
-  }
-  function transposition(n1, n2) {
-    var temp = ''
-    if (arr[n1] > arr[n2]) {
-      temp = arr[n1]
-      arr[n1] = arr[n2]
-      arr[n2] = temp
-    }
-  }
-  return arr
-}
-maopaoSort(arr)
-```
-
-测试冒泡算法
-
-```js
-const createArrayNode = function(num) {
-  let arr = new ArrayList()
-  for (let i = num; i >= 0; i--) {
-    arr.insert(i)
-  }
-  return arr
-}
-
-let arr = createArrayNode(8)
-console.log(arr.toString())
-arr.bubbleSort()
-console.log(arr.toString())
-```
-
 改进版冒泡算法
 
 ```js

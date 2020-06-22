@@ -35,7 +35,7 @@ function Dictionary() {
   }
 
   this.values = function() {
-    let values = {}
+    let values = []
     for (let key in items) {
       if (this.has(key)) {
         values.push(items[key])
@@ -44,7 +44,7 @@ function Dictionary() {
     return values
   }
 
-  this.getItem = function() {
+  this.getItems = function() {
     return items
   }
 }

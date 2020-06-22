@@ -1,10 +1,11 @@
-# Interface
+# Interface 接口
+
+接口定义
 
 ```js
 interface  IPerson {
   name: string
   age: number
-  job?: string
 }
 
 class Person {
@@ -18,6 +19,12 @@ var p = new Person({
   age: 20,
   job: 'develop' // 不允许，接口没有定义
 })
+
+interface  IPerson {
+  name: string
+  age: number
+  job?: string // 可选属性
+}
 
 // 接口定义的方法，所有继承的类都必须实现该方法
 interface Aminal {
@@ -50,7 +57,7 @@ const pos: Position = { x: 1, y: 2 }
 pos.x = 10 // error
 
 let num: number[] = [1, 2, 3, 4]
-let ro: ReadonlyArray<number> = a
+let ro: ReadonlyArray<number> = num
 
 ro[0] = 10 // error
 ro.push(5) // error

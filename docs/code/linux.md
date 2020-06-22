@@ -32,22 +32,69 @@ nslookup 网址
 
 ### tar命令
 
+```bash
 `-c` 或 `-create` 建立新备份文件
+```
+
+```bash
 `-C` 或 `-directory=<目录>` 切换目录
+```
+
+```bash
 `-f` 或 `–file=<备份文件>` 指定备份文件
-`-j` 或`–bzip2` 以bz2的算法来压缩或者解压文件
+```
+
+```bash
+`-j` 或 `–bzip2` 以bz2的算法来压缩或者解压文件
+```
+
+```bash
 `-k` 或 `–keep-old-files` 解开备份文件时，不覆盖已有的文件
+```
+
+```bash
 `-m` 或 `–modification-time` 还原文件时，不变更文件的更改时间
+```
+
+```bash
 `-N` 或 `–newer=<日期时间>` 只将较指定日期更新的文件保存到备份文件里
+```
+
+```bash
 `-r` 或 `–append` 新增文件到已存在的备份文件的结尾部分
+```
+
+```bash
 `-t` 或 `–list` 列出备份文件的内容
+```
+
+```bash
 `-u` 或 `–update` 仅置换较备份文件内的文件更新的文件
+```
+
+```bash
 `-v` 或 `–verbose` 显示指令执行过程
+```
+
+```bash
 `-w` 或 `–interactive` 遭遇问题时先询问用户
+```
+
+```bash
 `-W` 或 `–verify` 写入备份文件后，确认文件正确无误
+```
+
+```bash
 `-x` 或 `–extract` 或 `–get` 从备份文件中还原文件
+```
+
+```bash
 `-z` 或 `–gzip` 或 `–ungzip` 通过gzip指令处理备份文件
+```
+
+```bash
 `-Z` 或 `–compress` 或 `–uncompress` 通过compress指令处理备份文件
+```
 
 ### 打包与解包tar
 
@@ -103,6 +150,7 @@ tar -jxvf filename.tar.bz2 -C /home
 
 ### 查看命令`ls`
 
+```bash
 -a  列出包括.a开头的隐藏文件的所有文件
 -A  通-a，但不列出"."和".."
 -l  列出文件的详细信息
@@ -117,6 +165,7 @@ tar -jxvf filename.tar.bz2 -C /home
    红色闪烁：表示链接的文件有问题
    黄色：表示设备文件
    灰色：表示其它文件
+```
 
 ### 移动命令`mv`
 
@@ -738,12 +787,30 @@ file    载入crontab
 -r  删除某个用户的crontab文件
 ```
 
+```bash
 ifconfig [网络设备] [参数] | 查看和配置网络设备
+```
+
+```bash
 route | 显示和操作IP路由表
+```
+
+```bash
 ping [参数] [主机名或IP地址] | 测试与目标主机的连通性 -q  只显示最后的结果
+```
+
+```bash
 netstat | 显示与IP、TCP、UDP和ICMP协议相关的统计数据
+```
+
+```bash
 telnet [参数] [主机] | 用于远程登录，采用明文传送报文，安全性不好
+```
+
+```bash
 rcp [参数] [源文件] [目标文件] | 远程文件拷贝
+```
+
 
 ```bash
 -r  递归复制
@@ -751,6 +818,7 @@ rcp [参数] [源文件] [目标文件] | 远程文件拷贝
 usage: rcp –r remote_hostname:remote_dir local_dir
 ```
 
+```bash
 vmstat  对操作系统的虚拟内存、进程、CPU活动进行监控
 free [参数]  显示linux系统中空闲的、已用的物理内存及swap内存,及被内核使用的buffer
 kill [参数] [进程号]  杀死进程
@@ -779,16 +847,19 @@ groups 查看登陆用户支持的群组， 第一个输出的群组为有效群
 newgrp 切换有效群组
 groupadd [-g gid] 组名 | 添加组 -g  设定添加组的特定组id
 groupmod [-g gid] [-n group_name] 群组名  修改组信息
+```
 
 ```bash
 -g  修改既有的 GID 数字
 -n  修改既有的组名
 ```
 
+```bash
 groupdel [groupname] | 删除群组
 
 id [username] | 查看用户相关的id信息，还可以用来判断用户是否存在
 iostat [参数] [时间t] [次数n](每隔t时间刷新一次，最多刷新n次）对系统的磁盘操作活动进行监视,汇报磁盘活动统计情况，同时也会汇报出CPU使用情况
+```
 
 ```bash
 -p[磁盘] 显示磁盘和分区的情况

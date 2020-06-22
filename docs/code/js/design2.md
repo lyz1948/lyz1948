@@ -411,7 +411,7 @@ obj.message  // call me
   maxHeight: 450,
   // 还可以定义一些使用的方法
   gimmeMac: function() {
-    return this.maxWidth + ' * ' this.maxHeight
+    return this.maxWidth + ' * ' + this.maxHeight
   },
   init: function() {
     console.log(this.gimmeMac())
@@ -673,7 +673,7 @@ MYAPP.modules.module2 = {}
 命名空间函数
 
 ```js
-var MYAPP = MYAPP = {}
+var MYAPP = {}
 MYAPP.namespace = function(nsStr) {
   var parts = nsStr.split('.'),
       parent = MYAPP,
@@ -995,7 +995,7 @@ function Sandbox() {
   if(!modules || modules === '*') {
     modules = []
     for(i in Sandbox.modules) {
-      if(Sandbox.modules.hasOwnProperty) {
+      if(Sandbox.modules.hasOwnProperty(i)) {
         modules.push(i)
       }
     }

@@ -1,7 +1,6 @@
 # Koa 微信
 
 ```js
-
 const Koa = require('koa')
 const Router = require('koa-router')
 const sha1 = require('sha1')
