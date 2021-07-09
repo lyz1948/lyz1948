@@ -52,53 +52,53 @@ module.exports = {
         { text: '算法', link: '/code/algorithm/' },
         { text: 'Docker', link: '/code/docker/' },
       ]},
-      {
-        text: 'Get it',
-        items: [
-          { text: 'Finance', link: '/getit/finance/' },
-          { text: 'Math', link: '/getit/math/001' },
-          { text: 'Day Know', link: '/getit/day-know/001' },
-          { text: 'Life Algorithm', link: '/getit/life-algorithm/001' },
-          { text: 'Economics', link: '/getit/economics/' },
-          { text: 'Literature', link: '/getit/literature/' },
-        ],
-      },
+      // {
+      //   text: 'Get it',
+      //   items: [
+      //     { text: 'Finance', link: '/getit/finance/' },
+      //     { text: 'Math', link: '/getit/math/001' },
+      //     { text: 'Day Know', link: '/getit/day-know/001' },
+      //     { text: 'Life Algorithm', link: '/getit/life-algorithm/001' },
+      //     { text: 'Economics', link: '/getit/economics/' },
+      //     { text: 'Literature', link: '/getit/literature/' },
+      //   ],
+      // },
     ],
     sidebar: {
-      '/getit/': [
-        {
-          title: '经济学',
-          children: ['/getit/economics/', '/getit/economics/01'],
-        },
-        {
-          title: '金融学',
-          children: [
-            '/getit/finance/',
-            '/getit/finance/01',
-            '/getit/finance/02',
-            '/getit/finance/03',
-            '/getit/finance/04',
-            '/getit/finance/05',
-            '/getit/finance/06',
-          ],
-        },
-        {
-          title: '日知录',
-          children: ['/getit/day-know/001'],
-        },
-        {
-          title: '数学通识',
-          children: ['/getit/math/001', '/getit/math/002', '/getit/math/003'],
-        },
-        {
-          title: '人生算法',
-          children: ['/getit/life-algorithm/001', '/getit/life-algorithm/002'],
-        },
-        {
-          title: '文学',
-          children: ['/getit/literature/'],
-        },
-      ],
+      // '/getit/': [
+      //   {
+      //     title: '经济学',
+      //     children: ['/getit/economics/', '/getit/economics/01'],
+      //   },
+      //   {
+      //     title: '金融学',
+      //     children: [
+      //       '/getit/finance/',
+      //       '/getit/finance/01',
+      //       '/getit/finance/02',
+      //       '/getit/finance/03',
+      //       '/getit/finance/04',
+      //       '/getit/finance/05',
+      //       '/getit/finance/06',
+      //     ],
+      //   },
+      //   {
+      //     title: '日知录',
+      //     children: ['/getit/day-know/001'],
+      //   },
+      //   {
+      //     title: '数学通识',
+      //     children: ['/getit/math/001', '/getit/math/002', '/getit/math/003'],
+      //   },
+      //   {
+      //     title: '人生算法',
+      //     children: ['/getit/life-algorithm/001', '/getit/life-algorithm/002'],
+      //   },
+      //   {
+      //     title: '文学',
+      //     children: ['/getit/literature/'],
+      //   },
+      // ],
       '/code/js/': [
         '/code/js/variable',
         '/code/js/types',
